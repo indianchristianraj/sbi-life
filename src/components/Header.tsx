@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import { Menu, X, Globe, Phone, Shield } from 'lucide-react';
+import {
+  Menu,
+  X,
+  Shield,
+  ArrowRight,
+  Phone,
+  Calculator,
+  FileCheck2,
+  Users,
+  Compass,
+} from 'lucide-react';
 import { Language, PublicRoute } from '../types';
 import { TRANSLATIONS } from '../i18n/translations';
 import { ADVISOR_CONFIG } from '../config/advisorConfig';
-import { PWAInstallButton } from './PWAInstallButton';
-import { DownloadWebsiteButton } from './DownloadWebsiteButton';
 
 interface Props {
   currentRoute: PublicRoute;
@@ -21,6 +29,7 @@ export const Header: React.FC<Props> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = TRANSLATIONS[language];
+  const isKn = language === 'kn';
 
   const handleNav = (route: PublicRoute) => {
     setCurrentRoute(route);
@@ -29,77 +38,152 @@ export const Header: React.FC<Props> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-[#FAF9F5]/95 backdrop-blur-md border-b border-slate-200/80">
+    <header className="sticky top-0 z-40 bg-[#FAF9F5]/95 backdrop-blur-md border-b border-slate-200/80 transition-shadow duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Strict Top Bar Contract: Zone 1 (Brand) — Zone 2 (4-5 single-line links) — Zone 3 (1 primary action) */}
-        <div className="flex items-center justify-between gap-8 h-16">
-          {/* Zone 1: Single text element wordmark */}
-          <button
-            type="button"
-            onClick={() => handleNav('home')}
-            className="text-lg sm:text-xl font-bold tracking-tight text-[#0F1D36] whitespace-nowrap shrink-0 cursor-pointer text-left"
-          >
-            Sofia Rani
-          </button>
-
-          {/* Zone 2: 4–5 clean single-line text navigation links */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-700">
+        <div className="flex items-center justify-between h-20 gap-4">
+          
+          {/* LEFT: Premium Brand Emblem & Wordmark */}
+          <div className="flex items-center gap-3 shrink-0">
             <button
               type="button"
               onClick={() => handleNav('home')}
-              className={`hover:text-teal-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer py-1 ${
-                currentRoute === 'home' ? 'text-teal-900 font-semibold border-b-2 border-teal-800' : ''
+              className="flex items-center gap-3 text-left cursor-pointer group"
+              aria-label="Sofia Rani - Life Advisory Home"
+            >
+              {/* Geometric Brand Emblem */}
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F1D36] to-teal-900 flex items-center justify-center text-white shadow-sm ring-1 ring-black/5 group-hover:shadow transition-all">
+                <svg
+                  className="w-5 h-5 text-teal-300"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg sm:text-xl font-bold tracking-tight text-[#0F1D36] group-hover:text-teal-900 transition-colors">
+                  {ADVISOR_CONFIG.name}
+                </span>
+                <span className="text-[11px] font-medium text-slate-500 tracking-normal hidden sm:block">
+                  {isKn ? 'ಎಸ್.ಬಿ.ಐ ಲೈಫ್ ಅಧಿಕೃತ ಸಲಹೆಗಾರ್ತಿ · ಗಂಗಾವತಿ' : 'SBI Life Authorized Advisor · Gangavathi'}
+                </span>
+              </div>
+            </button>
+          </div>
+
+          {/* CENTER: Clean Agency-Quality Navigation */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-[13px] font-semibold text-slate-600">
+            <button
+              type="button"
+              onClick={() => handleNav('home')}
+              className={`transition-colors py-1.5 cursor-pointer relative ${
+                currentRoute === 'home'
+                  ? 'text-teal-950 font-bold'
+                  : 'hover:text-teal-900'
               }`}
             >
               {t.navHome}
+              {currentRoute === 'home' && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-800 rounded-full" />
+              )}
             </button>
+
             <button
               type="button"
-              onClick={() => handleNav('about')}
-              className={`hover:text-teal-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer py-1 ${
-                currentRoute === 'about' ? 'text-teal-900 font-semibold border-b-2 border-teal-800' : ''
+              onClick={() => handleNav('family-protection')}
+              className={`transition-colors py-1.5 cursor-pointer relative ${
+                currentRoute === 'family-protection' ||
+                currentRoute === 'children-education' ||
+                currentRoute === 'retirement'
+                  ? 'text-teal-950 font-bold'
+                  : 'hover:text-teal-900'
               }`}
             >
-              {t.navAbout}
+              {t.navServices || (isKn ? 'ಸೇವೆಗಳು & ಯೋಜನೆಗಳು' : 'Services & Plans')}
+              {(currentRoute === 'family-protection' ||
+                currentRoute === 'children-education' ||
+                currentRoute === 'retirement') && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-800 rounded-full" />
+              )}
             </button>
+
             <button
               type="button"
               onClick={() => handleNav('tools')}
-              className={`hover:text-teal-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer py-1 ${
-                currentRoute === 'tools' ? 'text-teal-900 font-semibold border-b-2 border-teal-800' : ''
+              className={`transition-colors py-1.5 cursor-pointer relative ${
+                currentRoute === 'tools'
+                  ? 'text-teal-950 font-bold'
+                  : 'hover:text-teal-900'
               }`}
             >
               {t.navTools}
+              {currentRoute === 'tools' && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-800 rounded-full" />
+              )}
             </button>
+
             <button
               type="button"
-              onClick={() => handleNav('learn')}
-              className={`hover:text-teal-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer py-1 ${
-                currentRoute === 'learn' ? 'text-teal-900 font-semibold border-b-2 border-teal-800' : ''
+              onClick={() => handleNav('about')}
+              className={`transition-colors py-1.5 cursor-pointer relative ${
+                currentRoute === 'about'
+                  ? 'text-teal-950 font-bold'
+                  : 'hover:text-teal-900'
               }`}
             >
-              {t.navLearn}
+              {t.navAbout}
+              {currentRoute === 'about' && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-800 rounded-full" />
+              )}
             </button>
+
             <button
               type="button"
               onClick={() => handleNav('customer-help')}
-              className={`hover:text-teal-900 transition-colors whitespace-nowrap shrink-0 cursor-pointer py-1 ${
-                currentRoute === 'customer-help' ? 'text-teal-900 font-semibold border-b-2 border-teal-800' : ''
+              className={`transition-colors py-1.5 cursor-pointer relative ${
+                currentRoute === 'customer-help'
+                  ? 'text-teal-950 font-bold'
+                  : 'hover:text-teal-900'
               }`}
             >
               {t.navCustomerHelp}
+              {currentRoute === 'customer-help' && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-800 rounded-full" />
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleNav('contact')}
+              className={`transition-colors py-1.5 cursor-pointer relative ${
+                currentRoute === 'contact'
+                  ? 'text-teal-950 font-bold'
+                  : 'hover:text-teal-900'
+              }`}
+            >
+              {t.navContact}
+              {currentRoute === 'contact' && (
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal-800 rounded-full" />
+              )}
             </button>
           </nav>
 
-          {/* Zone 3: 1 primary action + Language Switcher */}
+          {/* RIGHT: Language Switcher + Primary CTA */}
           <div className="flex items-center gap-3 shrink-0">
-            {/* Language Switcher */}
-            <div className="flex items-center bg-slate-100 rounded-lg p-0.5 border border-slate-200">
+            {/* Minimalist Language Switcher */}
+            <div className="flex items-center bg-slate-100/80 rounded-full p-1 border border-slate-200/90 text-xs">
               <button
                 type="button"
                 onClick={() => setLanguage('kn')}
-                className={`px-2 py-1 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-                  language === 'kn' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                className={`px-2.5 py-1 font-semibold rounded-full transition-all cursor-pointer ${
+                  language === 'kn'
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="ಕನ್ನಡ (Primary)"
               >
@@ -108,8 +192,10 @@ export const Header: React.FC<Props> = ({
               <button
                 type="button"
                 onClick={() => setLanguage('en')}
-                className={`px-2 py-1 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-                  language === 'en' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                className={`px-2.5 py-1 font-semibold rounded-full transition-all cursor-pointer ${
+                  language === 'en'
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
                 title="English"
               >
@@ -118,138 +204,121 @@ export const Header: React.FC<Props> = ({
               <button
                 type="button"
                 onClick={() => setLanguage('te')}
-                className={`px-2 py-1 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-                  language === 'te' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                className={`px-2.5 py-1 font-semibold rounded-full transition-all cursor-pointer ${
+                  language === 'te'
+                    ? 'bg-white text-slate-900 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
-                title="తెలుగు (Preview)"
+                title="తెలుగు"
               >
                 తెలుగు
               </button>
             </div>
 
-            {/* PWA In-App Install Button */}
-            <PWAInstallButton language={language} />
-
-            {/* Standalone Single-File index.html Download Button */}
-            <DownloadWebsiteButton variant="header" />
-
-            {/* Primary Action Button */}
+            {/* High-Conversion Primary CTA: Get Free Consultation */}
             <button
               type="button"
               onClick={() => handleNav('book')}
-              className="hidden sm:inline-flex px-4 py-2 text-xs font-semibold text-white bg-teal-800 hover:bg-teal-900 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer shadow-xs"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-teal-800 hover:bg-teal-900 rounded-full shadow-sm hover:shadow transition-all whitespace-nowrap shrink-0 cursor-pointer active:scale-95"
             >
-              {t.bookCallCta}
+              <span>{t.bookCallCta}</span>
+              <ArrowRight className="w-3.5 h-3.5 text-teal-200" />
             </button>
 
             {/* Mobile Hamburger Button */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-slate-700 hover:text-slate-900 rounded-lg hover:bg-slate-100 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="lg:hidden p-2 text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-100 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FAF9F5] border-b border-slate-200 px-4 pt-3 pb-6 space-y-3">
-          <div className="text-xs text-slate-500 font-medium px-2 pb-1 border-b border-slate-200">
-            {ADVISOR_CONFIG.name} · {ADVISOR_CONFIG.professionalTitle[language]} · {ADVISOR_CONFIG.location.city}
+        <div className="lg:hidden bg-[#FAF9F5] border-b border-slate-200 shadow-xl px-5 py-6 space-y-4">
+          <div className="pb-3 border-b border-slate-200 flex items-center justify-between">
+            <div>
+              <div className="text-sm font-bold text-slate-900">{ADVISOR_CONFIG.name}</div>
+              <div className="text-xs text-slate-500">
+                {ADVISOR_CONFIG.professionalTitle[language]} · {ADVISOR_CONFIG.location.city}
+              </div>
+            </div>
+            <span className="text-[11px] font-semibold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
+              IRDAI Registered
+            </span>
           </div>
 
           <div className="grid grid-cols-1 gap-1 text-sm font-medium text-slate-800">
             <button
               type="button"
               onClick={() => handleNav('home')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
+              className="text-left px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
             >
-              {t.navHome}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNav('about')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
-            >
-              {t.navAbout}
+              <span>{t.navHome}</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
             </button>
             <button
               type="button"
               onClick={() => handleNav('family-protection')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
+              className="text-left px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
             >
-              {t.navProtection}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNav('children-education')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
-            >
-              {t.navChildren}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNav('retirement')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
-            >
-              {t.navRetirement}
+              <span>{t.navServices || (isKn ? 'ಸೇವೆಗಳು & ಯೋಜನೆಗಳು' : 'Services & Plans')}</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
             </button>
             <button
               type="button"
               onClick={() => handleNav('tools')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
+              className="text-left px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
             >
-              {t.navTools}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNav('learn')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
-            >
-              {t.navLearn}
+              <span>{t.navTools}</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
             </button>
             <button
               type="button"
               onClick={() => handleNav('customer-help')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
+              className="text-left px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
             >
-              {t.navCustomerHelp}
+              <span>{t.navCustomerHelp}</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNav('learn')}
+              className="text-left px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
+            >
+              <span>{t.navLearn}</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
+            </button>
+            <button
+              type="button"
+              onClick={() => handleNav('about')}
+              className="text-left px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
+            >
+              <span>{t.navAbout}</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
             </button>
             <button
               type="button"
               onClick={() => handleNav('contact')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 min-h-[44px] flex items-center"
+              className="text-left px-3 py-2.5 rounded-xl hover:bg-slate-100 flex items-center justify-between"
             >
-              {t.navContact}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNav('disclosures')}
-              className="text-left px-3 py-2 rounded-lg hover:bg-slate-100 text-xs text-slate-600 min-h-[44px] flex items-center"
-            >
-              {t.navDisclosures}
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNav('admin')}
-              className="text-left px-3 py-2 rounded-lg bg-teal-50 text-teal-900 text-xs font-semibold min-h-[44px] flex items-center gap-1.5"
-            >
-              <Shield className="w-3.5 h-3.5 text-teal-700" />
-              <span>{t.navAdmin} (Phase 1 Preview)</span>
+              <span>{t.navContact}</span>
+              <ArrowRight className="w-4 h-4 text-slate-400" />
             </button>
           </div>
 
-          <div className="pt-2 space-y-2">
-            <DownloadWebsiteButton variant="footer" />
+          <div className="pt-2">
             <button
               type="button"
               onClick={() => handleNav('book')}
-              className="w-full py-2.5 px-4 bg-teal-800 text-white rounded-lg text-xs font-semibold flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-4 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow-sm"
             >
+              <Phone className="w-4 h-4" />
               <span>{t.bookCallCta}</span>
             </button>
           </div>

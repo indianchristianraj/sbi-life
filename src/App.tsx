@@ -14,7 +14,6 @@ import { MobileBottomBar } from './components/MobileBottomBar';
 import { Footer } from './components/Footer';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import { FamilyPlanningGuideModal } from './components/FamilyPlanningGuideModal';
-import { DownloadWebsiteButton } from './components/DownloadWebsiteButton';
 
 import { HomeView } from './components/views/HomeView';
 import { AboutView } from './components/views/AboutView';
@@ -247,24 +246,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-[#0F1D36] selection:bg-teal-100 selection:text-teal-900">
-      {/* Standalone Export Banner */}
-      <div className="bg-slate-900 text-slate-200 px-4 py-2 text-xs border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-center sm:text-left">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
-            <span className="text-slate-300">
-              {language === 'kn'
-                ? 'ಸಂಪೂರ್ಣ ವೆಬ್‌ಸೈಟ್ ಆಫ್‌ಲೈನ್ ಆವೃತ್ತಿ (ನೋಡ್/ಸರ್ವರ್ ಅಗತ್ಯವಿಲ್ಲದೆ ನೇರವಾಗಿ ತೆರೆಯಬಹುದು):'
-                : 'Complete offline standalone website (runs directly via file:// without Node/npm):'}
-            </span>
-          </div>
-          <div className="shrink-0">
-            <DownloadWebsiteButton variant="banner" />
-          </div>
-        </div>
-      </div>
-
-      {/* Top Navigation Bar adhering to Top Bar Contract */}
+      {/* Top Navigation Bar */}
       <Header
         currentRoute={currentRoute}
         setCurrentRoute={handleNavigate}

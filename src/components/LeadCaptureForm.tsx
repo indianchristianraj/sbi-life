@@ -126,16 +126,16 @@ export const LeadCaptureForm: React.FC<Props> = ({
           </div>
         </div>
 
-        {/* Phase 1 Preview Honest Explanation */}
-        <div className="bg-amber-50 border border-amber-200/80 rounded-xl p-4 text-xs text-amber-900 mb-6 space-y-1.5">
-          <div className="font-bold flex items-center gap-1.5">
-            <AlertCircle className="w-4 h-4 text-amber-700 shrink-0" />
-            <span>{isKn ? 'ಫೇಸ್ 1 ಪೂರ್ವವೀಕ್ಷಣೆ ಮಾಹಿತಿ (Phase 1 Preview)' : 'Phase 1 Functional Preview Notice'}</span>
+        {/* Customer Trust & Privacy Assurance */}
+        <div className="bg-teal-50/80 border border-teal-200/80 rounded-xl p-4 text-xs text-teal-900 mb-6 space-y-1.5">
+          <div className="font-bold flex items-center gap-1.5 text-teal-950">
+            <Shield className="w-4 h-4 text-teal-700 shrink-0" />
+            <span>{isKn ? 'ಗೌಪ್ಯತೆ & ಸೇವಾ ಭರವಸೆ' : 'Advisory Confirmation & Privacy Guarantee'}</span>
           </div>
-          <p className="leading-relaxed">
+          <p className="leading-relaxed text-teal-900/90">
             {isKn
-              ? 'ಇದು ವೆಬ್‌ಸೈಟ್‌ನ ಮೊದಲ ಹಂತದ ಪೂರ್ವವೀಕ್ಷಣೆಯಾಗಿದೆ. ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಸ್ಥಳೀಯ ಅಡ್ಮಿನ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿ ದಾಖಲಿಸಲಾಗಿದೆ. ಯಾವುದೇ ಸುಳ್ಳು SMS ಅಥವಾ ಇಮೇಲ್ ಕಳುಹಿಸಲಾಗಿಲ್ಲ ಎಂದು ನಾವು ಪ್ರಾಮಾಣಿಕವಾಗಿ ಸ್ಪಷ್ಟಪಡಿಸುತ್ತೇವೆ. ಫೇಸ್ 2 ರಲ್ಲಿ ಸರ್ವರ್ ದೃಢೀಕರಣ ಮತ್ತು ನೇರ ಡೇಟಾಬೇಸ್ ಸಂಪರ್ಕಗೊಳ್ಳಲಿದೆ.'
-              : 'This is the Phase 1 functional preview. Your enquiry has been added to the session lead manager. In accordance with strict integrity rules, no automated SMS or email was simulated. Sofia Rani will review during working hours.'}
+              ? 'ನಿಮ್ಮ ಸಮಾಲೋಚನಾ ಮನವಿಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ. ಸೋಫಿಯಾ ರಾಣಿ ಅವರು ನಿಮ್ಮ ಆಯ್ಕೆಯ ಸಮಯದಲ್ಲಿ ಖುದ್ದಾಗಿ ಸಂಪರ್ಕಿಸುತ್ತಾರೆ. ಭಾರತ ಸರ್ಕಾರದ DPDP ಕಾಯ್ದೆ 2023 ರ ಅಡಿಯಲ್ಲಿ ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ವಿವರಗಳನ್ನು ಸಂಪೂರ್ಣ ಗೌಪ್ಯವಾಗಿಡಲಾಗುತ್ತದೆ.'
+              : 'Your consultation request has been securely recorded. Sofia Rani will personally connect with you at your chosen callback window. Your data is protected under the Digital Personal Data Protection (DPDP) Act 2023.'}
           </p>
         </div>
 

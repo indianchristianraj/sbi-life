@@ -1,9 +1,8 @@
 import React from 'react';
-import { Phone, MessageCircle, MapPin, Clock, Shield, Lock, Download } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Clock, Shield, Lock } from 'lucide-react';
 import { Language, PublicRoute } from '../types';
 import { TRANSLATIONS } from '../i18n/translations';
 import { ADVISOR_CONFIG } from '../config/advisorConfig';
-import { DownloadWebsiteButton } from './DownloadWebsiteButton';
 
 interface Props {
   language: Language;
@@ -13,25 +12,6 @@ interface Props {
 export const Footer: React.FC<Props> = ({ language, onNavigate }) => {
   const t = TRANSLATIONS[language];
   const isKn = language === 'kn';
-
-  const handleDirectDownload = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch('/index.html');
-      const text = await res.text();
-      const blob = new Blob([text], { type: 'text/html;charset=utf-8' });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'index.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    } catch {
-      window.location.href = '/download/index.html';
-    }
-  };
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-12 pb-24 md:pb-12 text-sm border-t border-slate-800">
@@ -205,23 +185,17 @@ export const Footer: React.FC<Props> = ({ language, onNavigate }) => {
                   {t.navContact}
                 </button>
               </li>
-              <li className="pt-1">
-                <DownloadWebsiteButton variant="footer" />
-              </li>
             </ul>
 
             <div className="pt-3 border-t border-slate-800">
               <button
                 type="button"
                 onClick={() => onNavigate('admin')}
-                className="w-full py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-teal-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                className="w-full py-2 px-3 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-teal-300 hover:text-teal-200 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Lock className="w-3.5 h-3.5 text-teal-400" />
-                <span>{isKn ? 'ಸಲಹೆಗಾರರ ಖಾಸಗಿ ಪೋರ್ಟಲ್' : 'Advisor Private Portal'}</span>
+                <span>{isKn ? 'ಸಲಹೆಗಾರರ ಖಾಸಗಿ ಪೋರ್ಟಲ್' : 'Advisor Secure Access'}</span>
               </button>
-              <span className="text-[10px] text-slate-500 block text-center mt-1">
-                Phase 1 Simulation · Phase 2 Persistence Ready
-              </span>
             </div>
           </div>
         </div>

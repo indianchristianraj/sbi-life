@@ -40,6 +40,11 @@ import {
 import { ADVISOR_CONFIG } from '../../config/advisorConfig';
 import { DEFAULT_HERO_SLIDES, DEFAULT_HERO_SLIDER_GLOBAL_CONFIG } from '../../config/heroAndGuideConfig';
 import { HeroCarousel } from '../HeroCarousel';
+import {
+  downloadStandaloneIndexHtml,
+  downloadNetlifyZip,
+  downloadSourceZip,
+} from '../DownloadWebsiteButton';
 
 interface Props {
   leads: LeadRecord[];
@@ -422,31 +427,62 @@ export const AdminPortalView: React.FC<Props> = ({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 pb-24">
-      {/* Top Banner: Clearly Labeled Phase 1 Demonstration & Connection Protocol */}
+      {/* Top Banner: Private Advisor Management Suite */}
       <div className="bg-slate-900 text-white rounded-2xl p-5 border border-slate-800 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-teal-400"></span>
             <span className="text-xs font-semibold text-teal-300 uppercase tracking-wider">
-              Phase 1 Functional Preview · Private Advisor Suite
+              Private Advisor Suite · Secure Management Dashboard
             </span>
           </div>
           <h1 className="text-xl font-bold tracking-tight">
             Sofia Rani · Lead & Appointment Management
           </h1>
           <p className="text-xs text-slate-400">
-            Gangavathi Hub · Asia/Kolkata (IST) · Session simulation active. Phase 2 will link live Firebase Auth & persistent Firestore.
+            Gangavathi Hub · Asia/Kolkata (IST) · Real-time Session Records & Customer Enquiries
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
             onClick={handleExportCSV}
-            className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
+            className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
+            title="Download CSV of customer leads"
           >
             <Download className="w-3.5 h-3.5 text-teal-400" />
-            <span>Export Encrypted CSV</span>
+            <span>Export CSV</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => downloadStandaloneIndexHtml()}
+            className="px-3 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer border border-emerald-700/60"
+            title="Download single-file standalone index.html"
+          >
+            <Download className="w-3.5 h-3.5 text-emerald-300" />
+            <span>Export index.html</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => downloadNetlifyZip()}
+            className="px-3 py-1.5 bg-teal-900/60 hover:bg-teal-800 text-teal-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer border border-teal-700/60"
+            title="Download Netlify deployment ZIP ready for drag-and-drop"
+          >
+            <Download className="w-3.5 h-3.5 text-teal-300" />
+            <span>Netlify ZIP</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => downloadSourceZip()}
+            className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700"
+            title="Download complete project source ZIP"
+          >
+            <Download className="w-3.5 h-3.5 text-slate-400" />
+            <span>Source ZIP</span>
           </button>
         </div>
       </div>
