@@ -17,6 +17,7 @@ export const ContactView: React.FC<Props> = ({
   onOpenBookingForCity,
 }) => {
   const isKn = language === 'kn';
+  const isTe = language === 'te';
 
   const handleCitySelected = (cityId: string) => {
     if (onOpenBookingForCity) {
@@ -27,35 +28,51 @@ export const ContactView: React.FC<Props> = ({
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 pb-24">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 pb-24 w-full max-w-full overflow-hidden">
       {/* Title */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
         <span className="text-xs font-semibold uppercase tracking-wider text-teal-800">
-          {isKn ? 'ಸ್ಥಳೀಯ ಸಂಪರ್ಕ' : 'Regional Advisory Presence'}
+          {isKn ? 'ಸ್ಥಳೀಯ ಸಂಪರ್ಕ' : isTe ? 'స్థానిక సంప్రదింపులు' : 'Regional Advisory Presence'}
         </span>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          {isKn ? 'ಗಂಗಾವತಿಯಲ್ಲಿ ಸೋಫಿಯಾ ರಾಣಿ ಅವರನ್ನು ಸಂಪರ್ಕಿಸಿ' : 'Connect with Sofia Rani in Gangavathi'}
+          {isKn
+            ? 'ಸಿಂಧನೂರಿನಲ್ಲಿ ಸೋಫಿಯಾ ರಾಣಿ ಅವರನ್ನು ಸಂಪರ್ಕಿಸಿ'
+            : isTe
+            ? 'సింధనూరులో సోఫియా రాణి గారిని సంప్రదించండి'
+            : 'Connect with Sofia Rani in Sindhanur'}
         </h1>
         <p className="text-xs sm:text-sm text-slate-600">
           {isKn
             ? 'ದೂರವಾಣಿ, ವಾಟ್ಸಾಪ್ ಅಥವಾ ಮುಂಚಿತ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಮೂಲಕ ಮುಖಾಮುಖಿ ಸಮಾಲೋಚನೆ ಲಭ್ಯವಿದೆ.'
-            : 'Personal and telephone advisory available across Gangavathi, Koppal, and surrounding Karnataka taluks.'}
+            : isTe
+            ? 'ఫోన్, వాట్సాప్ లేదా ముందస్తు అపాయింట్‌మెంట్ ద్వారా ముఖాముఖి సలహా అందుబాటులో ఉంది.'
+            : 'Personal and telephone advisory available across Sindhanur, Raichur District, and surrounding Karnataka & border hubs.'}
         </p>
       </div>
 
-      {/* Scenic Gangavathi Editorial Image */}
+      {/* Scenic Regional Landscape */}
       <div className="rounded-3xl overflow-hidden border border-slate-200 relative aspect-[16/8] shadow-sm">
         <img
           src={GANGAVATHI_LANDSCAPE}
-          alt="Scenic Gangavathi paddy fields and granite hillocks at sunrise"
+          alt="Scenic Tungabhadra basin agricultural landscape at sunrise"
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-6">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent flex items-end p-6">
           <div className="text-white text-xs">
-            <span className="font-bold text-sm block">Gangavathi, Koppal District</span>
+            <span className="font-bold text-sm block">
+              {isKn
+                ? 'ಸಿಂಧನೂರು, ರಾಯಚೂರು ಜಿಲ್ಲೆ, ಕರ್ನಾಟಕ'
+                : isTe
+                ? 'సింధనూరు, రాయచూరు జిల్లా, కర్ణాటక'
+                : 'Sindhanur, Raichur District, Karnataka'}
+            </span>
             <span className="text-slate-200">
-              {isKn ? 'ಸ್ಥಳೀಯ ಗ್ರಾಮೀಣ & ಪಟ್ಟಣ ಕುಟುಂಬಗಳಿಗೆ ಸಮರ್ಪಿತ ಸೇವೆ' : 'Dedicated to families across the Tungabhadra basin'}
+              {isKn
+                ? 'ಸ್ಥಳೀಯ ಗ್ರಾಮೀಣ & ಪಟ್ಟಣ ಕುಟುಂಬಗಳಿಗೆ ಪ್ರಾಮಾಣಿಕ ಸೇವೆ'
+                : isTe
+                ? 'గ్రామీణ మరియు పట్టణ కుటుంబాలకు నిబద్ధతతో కూడిన సేవలు'
+                : 'Dedicated insurance advisory across the Tungabhadra irrigation belt'}
             </span>
           </div>
         </div>
@@ -69,11 +86,13 @@ export const ContactView: React.FC<Props> = ({
             <Phone className="w-5 h-5 text-teal-700" />
           </div>
           <h3 className="text-sm font-bold text-slate-900">
-            {isKn ? 'ನೇರ ದೂರವಾಣಿ ಕರೆ' : 'Direct Telephone Call'}
+            {isKn ? 'ನೇರ ದೂರವಾಣಿ ಕರೆ' : isTe ? 'ప్రత్యక్ష ఫోన్ కాల్' : 'Direct Telephone Call'}
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             {isKn
               ? 'ಕೆಲಸದ ಅವಧಿಯಲ್ಲಿ (ಬೆಳಗ್ಗೆ 9:30 ರಿಂದ ಸಂಜೆ 6:30) ನೇರವಾಗಿ ಮಾತನಾಡಿ.'
+              : isTe
+              ? 'పనివేళల్లో (ఉదయం 9:30 నుండి సాయంత్రం 6:30) నేరుగా మాట్లాడండి.'
               : 'Speak directly with Sofia Rani during official working hours.'}
           </p>
           <a
@@ -91,11 +110,13 @@ export const ContactView: React.FC<Props> = ({
             <MessageCircle className="w-5 h-5 text-emerald-700" />
           </div>
           <h3 className="text-sm font-bold text-slate-900">
-            {isKn ? 'ಅಧಿಕೃತ ವಾಟ್ಸಾಪ್ ಸಮಾಲೋಚನೆ' : 'Official WhatsApp Enquiry'}
+            {isKn ? 'ಅಧಿಕೃತ ವಾಟ್ಸಾಪ್ ಸಮಾಲೋಚನೆ' : isTe ? 'అధికారిక వాట్సాప్ విచారణ' : 'Official WhatsApp Enquiry'}
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
             {isKn
               ? 'ನಿಮ್ಮ ಪ್ರಶ್ನೆ ಅಥವಾ ಅನುಕೂಲಕರ ಸಮಯವನ್ನು ವಾಟ್ಸಾಪ್ ಮೂಲಕ ಕಳುಹಿಸಿ.'
+              : isTe
+              ? 'మీ ప్రశ్న లేదా అనుకూల సమయాన్ని వాట్సాప్ ద్వారా పంపండి.'
               : 'Send a quick message to check availability or request a callback.'}
           </p>
           <a
@@ -114,24 +135,36 @@ export const ContactView: React.FC<Props> = ({
       <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 text-xs text-slate-700 space-y-3">
         <h4 className="font-bold text-slate-900 flex items-center gap-2">
           <Clock className="w-4 h-4 text-teal-800" />
-          <span>{isKn ? 'ಕಾರ್ಯನಿರ್ವಹಣಾ ಸಮಯ ಮತ್ತು ಭೇಟಿ ನಿಯಮಗಳು' : 'Advisory Hours & In-Person Protocols'}</span>
+          <span>
+            {isKn
+              ? 'ಕಾರ್ಯನಿರ್ವಹಣಾ ಸಮಯ ಮತ್ತು ಭೇಟಿ ನಿಯಮಗಳು'
+              : isTe
+              ? 'పని వేళలు & సందర్శన నిబంధనలు'
+              : 'Advisory Hours & In-Person Protocols'}
+          </span>
         </h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-600">
           <div>
-            <strong className="text-slate-800 block">{isKn ? 'ದಿನಗಳು:' : 'Days:'}</strong>
-            <span>{isKn ? ADVISOR_CONFIG.workingHours.daysKn : ADVISOR_CONFIG.workingHours.days}</span>
+            <strong className="text-slate-800 block">{isKn ? 'ದಿನಗಳು:' : isTe ? 'రోజులు:' : 'Days:'}</strong>
+            <span>{isKn ? ADVISOR_CONFIG.workingHours.daysKn : isTe ? ADVISOR_CONFIG.workingHours.daysTe : ADVISOR_CONFIG.workingHours.days}</span>
           </div>
           <div>
-            <strong className="text-slate-800 block">{isKn ? 'ಸಮಯ:' : 'Timings:'}</strong>
-            <span>{isKn ? ADVISOR_CONFIG.workingHours.timingsKn : ADVISOR_CONFIG.workingHours.timings}</span>
+            <strong className="text-slate-800 block">{isKn ? 'ಸಮಯ:' : isTe ? 'సమయం:' : 'Timings:'}</strong>
+            <span>{isKn ? ADVISOR_CONFIG.workingHours.timingsKn : isTe ? ADVISOR_CONFIG.workingHours.timingsTe : ADVISOR_CONFIG.workingHours.timings}</span>
           </div>
           <div>
-            <strong className="text-slate-800 block">{isKn ? 'ಭಾನುವಾರ:' : 'Sunday Policy:'}</strong>
-            <span>{isKn ? ADVISOR_CONFIG.workingHours.sundayPolicyKn : ADVISOR_CONFIG.workingHours.sundayPolicy}</span>
+            <strong className="text-slate-800 block">{isKn ? 'ಭಾನುವಾರ:' : isTe ? 'ఆదివారం:' : 'Sunday Policy:'}</strong>
+            <span>{isKn ? ADVISOR_CONFIG.workingHours.sundayPolicyKn : isTe ? ADVISOR_CONFIG.workingHours.sundayPolicyTe : ADVISOR_CONFIG.workingHours.sundayPolicy}</span>
           </div>
           <div>
-            <strong className="text-slate-800 block">{isKn ? 'ಮುಖಾಮುಖಿ ಭೇಟಿ:' : 'In-Person Meetings:'}</strong>
-            <span>{isKn ? 'ಗಂಗಾವತಿಯಲ್ಲಿ ಮುಂಚಿತ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಮೂಲಕ ಮಾತ್ರ' : 'Prior appointment required in Gangavathi'}</span>
+            <strong className="text-slate-800 block">{isKn ? 'ಮುಖಾಮುಖಿ ಭೇಟಿ:' : isTe ? 'ప్రత్యక్ష సమావేశాలు:' : 'In-Person Meetings:'}</strong>
+            <span>
+              {isKn
+                ? 'ಸಿಂಧನೂರಿನಲ್ಲಿ ಮುಂಚಿತ ಅಪಾಯಿಂಟ್‌ಮೆಂಟ್ ಮೂಲಕ ಮಾತ್ರ'
+                : isTe
+                ? 'సింధనూరులో ముందస్తు అపాయింట్‌మెంట్‌తో మాత్రమే'
+                : 'Prior appointment required in Sindhanur'}
+            </span>
           </div>
         </div>
 
@@ -140,6 +173,8 @@ export const ContactView: React.FC<Props> = ({
           <span>
             {isKn
               ? 'ಭದ್ರತಾ ಸೂಚನೆ: ಯಾವುದೇ ಸಂದರ್ಭದಲ್ಲೂ ವೈಯಕ್ತಿಕವಾಗಿ ನಗದು ನೀಡಬೇಡಿ. ಎಲ್ಲಾ ಪ್ರೀಮಿಯಂ ಪಾವತಿಗಳನ್ನು ನೇರವಾಗಿ ಅಧಿಕೃತ ಕಂಪನಿ ಖಾತೆಗೆ ಮಾತ್ರ ಮಾಡಬೇಕು.'
+              : isTe
+              ? 'భద్రతా సూచన: ఎట్టి పరిస్థితుల్లోనూ నగదు ఇవ్వవద్దు. అన్ని ప్రీమియం చెల్లింపులు నేరుగా అధికారిక SBI లైఫ్ ఖాతాకు మాత్రమే చేయాలి.'
               : 'Zero cash protocol: Neither Sofia Rani nor any representative collects cash. Premium payments must occur through official SBI Life counters/portals.'}
           </span>
         </div>

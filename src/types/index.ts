@@ -61,7 +61,7 @@ export interface AppointmentSlot {
   durationMinutes: number;
   topic: string;
   status: 'Confirmed' | 'Pending Callback' | 'Cancelled' | 'Completed';
-  meetingType: 'Phone Call' | 'In-person (Gangavathi)' | 'WhatsApp Call';
+  meetingType: 'Phone Call' | 'In-person (Sindhanur)' | 'In-person (Gangavathi)' | 'WhatsApp Call';
   createdAt: string;
 }
 
@@ -129,26 +129,34 @@ export interface HeroSlideConfig {
   isVisible: boolean;
   titleKn?: string;
   titleEn?: string;
+  titleTe?: string;
   taglineKn: string;
   taglineEn: string;
+  taglineTe?: string;
   headline?: string;
   headlineKn: string;
   headlineEn: string;
+  headlineTe?: string;
   subHeadline?: string;
   subHeadlineKn?: string;
   subHeadlineEn?: string;
+  subHeadlineTe?: string;
   supportingKn: string;
   supportingEn: string;
+  supportingTe?: string;
   primaryActionLabelKn: string;
   primaryActionLabelEn: string;
+  primaryActionLabelTe?: string;
   primaryActionDestination: PublicRoute | 'open-guide';
   secondaryActionLabelKn?: string;
   secondaryActionLabelEn?: string;
+  secondaryActionLabelTe?: string;
   secondaryActionDestination?: PublicRoute | 'open-guide' | 'whatsapp';
   desktopImage: string;
   mobileImage?: string;
   imageAltKn: string;
   imageAltEn: string;
+  imageAltTe?: string;
   isPortraitPlaceholder?: boolean;
   desktopFocalPoint?: 'center' | 'left' | 'right' | 'top' | 'bottom';
   mobileFocalPoint?: 'center' | 'top' | 'bottom';

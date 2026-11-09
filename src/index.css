@@ -6,6 +6,18 @@
     --font-latin: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
   html {
     font-family: var(--font-kannada), var(--font-latin);
     scroll-behavior: smooth;

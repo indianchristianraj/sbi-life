@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import {
   ShieldCheck,
   MessageCircle,
@@ -21,6 +21,7 @@ import { DEFAULT_HERO_SLIDES, DEFAULT_HERO_SLIDER_GLOBAL_CONFIG } from '../../co
 import { HeroCarousel } from '../HeroCarousel';
 import { LeadCaptureForm } from '../LeadCaptureForm';
 import { TestimonialCarousel } from '../TestimonialCarousel';
+import { RegionalHubsSection } from '../RegionalHubsSection';
 
 interface Props {
   language: Language;
@@ -48,8 +49,18 @@ export const HomeView: React.FC<Props> = ({
   const t = TRANSLATIONS[language];
   const isKn = language === 'kn';
 
+  const [prefilledCity, setPrefilledCity] = useState('Sindhanur');
+  const enquiryFormRef = useRef<HTMLDivElement>(null);
+
+  const handleSelectArea = (cityId: string) => {
+    setPrefilledCity(cityId);
+    if (enquiryFormRef.current) {
+      enquiryFormRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="space-y-16 pb-16">
+    <div className="space-y-16 pb-16 w-full max-w-full overflow-hidden">
       {/* 1. PREMIUM FIVE-SLIDE HOMEPAGE HERO WITH AUTOMATIC ROTATION */}
       <HeroCarousel
         language={language}
@@ -368,10 +379,19 @@ export const HomeView: React.FC<Props> = ({
         </div>
       </section>
 
-      {/* 8. SHORT ENQUIRY FORM */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 8. AREAS WE SERVE (SINDHANUR & REGIONAL HUBS) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <RegionalHubsSection
+          language={language}
+          onSelectCity={handleSelectArea}
+        />
+      </section>
+
+      {/* 9. SHORT ENQUIRY FORM */}
+      <section ref={enquiryFormRef} className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <LeadCaptureForm
           language={language}
+          prefilledCity={prefilledCity}
           onLeadSubmitted={onLeadCaptured}
           isCallbackRequestOnly={false}
         />

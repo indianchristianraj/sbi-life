@@ -81,8 +81,8 @@ export const AboutView: React.FC<Props> = ({ language, onNavigate }) => {
         <div className="bg-white rounded-2xl p-6 border border-slate-200/90 text-sm text-slate-700 space-y-4 leading-relaxed">
           <p>
             {isKn
-              ? 'ಗಂಗಾವತಿ ಮತ್ತು ಕೊಪ್ಪಳ ಜಿಲ್ಲೆಯ ಕುಟುಂಬಗಳಿಗೆ ಜೀವ ವಿಮೆಯು ಕೇವಲ ತೆರಿಗೆ ಉಳಿತಾಯದ ಸಾಧನವಲ್ಲ, ಅದು ಕುಟುಂಬದ ಮುಖ್ಯ ದುಡಿಯುವ ವ್ಯಕ್ತಿಯ ಅನುಪಸ್ಥಿತಿಯಲ್ಲಿ ಮಕ್ಕಳ ಶಿಕ್ಷಣ ಮತ್ತು ಗೌರವಯುತ ಬದುಕನ್ನು ರಕ್ಷಿಸುವ ಬುನಾದಿ.'
-              : 'For families across Gangavathi and Koppal district, life insurance is not merely a tax-saving transaction. It is the bedrock of family continuity, guaranteeing that children’s education and household dignity remain uninterrupted even in unexpected tragedies.'}
+              ? 'ಸಿಂಧನೂರು, ರಾಯಚೂರು ಜಿಲ್ಲೆ ಹಾಗೂ ಸುತ್ತಮುತ್ತಲಿನ ಕೃಷಿ ಮತ್ತು ವ್ಯಾಪಾರಿ ಕುಟುಂಬಗಳಿಗೆ ಜೀವ ವಿಮೆಯು ಕೇವಲ ತೆರಿಗೆ ಉಳಿತಾಯದ ಸಾಧನವಲ್ಲ, ಅದು ಕುಟುಂಬದ ಮುಖ್ಯ ದುಡಿಯುವ ವ್ಯಕ್ತಿಯ ಅನುಪಸ್ಥಿತಿಯಲ್ಲಿ ಮಕ್ಕಳ ಶಿಕ್ಷಣ ಮತ್ತು ಗೌರವಯುತ ಬದುಕನ್ನು ರಕ್ಷಿಸುವ ಬುನಾದಿ.'
+              : 'For families across Sindhanur, Raichur District, and neighboring Karnataka hubs, life insurance is not merely a tax-saving transaction. It is the bedrock of family continuity, guaranteeing that children’s education and household dignity remain uninterrupted even in unexpected tragedies.'}
           </p>
           <p>
             {isKn
@@ -151,11 +151,11 @@ export const AboutView: React.FC<Props> = ({ language, onNavigate }) => {
       {/* Service Coverage Taluks */}
       <section className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
         <h3 className="text-sm font-bold text-slate-900 mb-2">
-          {isKn ? 'ಗಂಗಾವತಿ ಮತ್ತು ಸುತ್ತಮುತ್ತಲಿನ ಸೇವಾ ಪ್ರದೇಶಗಳು' : 'Local Service Coverage Area'}
+          {isKn ? 'ಸಿಂಧನೂರು ಮತ್ತು ಸುತ್ತಮುತ್ತಲಿನ ಸೇವಾ ಪ್ರದೇಶಗಳು' : 'Local Service Coverage Area'}
         </h3>
         <p className="text-xs text-slate-600 mb-3 leading-relaxed">
           {isKn
-            ? 'ಕೊಪ್ಪಳ, ಬಳ್ಳಾರಿ ಮತ್ತು ವಿಜಯನಗರ ಜಿಲ್ಲೆಗಳ ಕೆಳಗಿನ ತಾಲೂಕುಗಳಲ್ಲಿ ವಾಸಿಸುವ ನಾಗರಿಕರು ಮುಖಾಮುಖಿ ಅಥವಾ ದೂರವಾಣಿ ಸಮಾಲೋಚನೆಗೆ ಸಂಪರ್ಕಿಸಬಹುದು:'
+            ? 'ರಾಯಚೂರು, ಕೊಪ್ಪಳ ಮತ್ತು ಬಳ್ಳಾರಿ ಜಿಲ್ಲೆಗಳ ಕೆಳಗಿನ ತಾಲೂಕುಗಳಲ್ಲಿ ವಾಸಿಸುವ ನಾಗರಿಕರು ಮುಖಾಮುಖಿ ಅಥವಾ ದೂರವಾಣಿ ಸಮಾಲೋಚನೆಗೆ ಸಂಪರ್ಕಿಸಬಹುದು:'
             : 'Personal and telephone advisory available across the following regional taluks:'}
         </p>
         <div className="flex flex-wrap gap-2 text-xs">

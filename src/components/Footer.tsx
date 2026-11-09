@@ -12,6 +12,7 @@ interface Props {
 export const Footer: React.FC<Props> = ({ language, onNavigate }) => {
   const t = TRANSLATIONS[language];
   const isKn = language === 'kn';
+  const isTe = language === 'te';
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-12 pb-24 md:pb-12 text-sm border-t border-slate-800">
@@ -27,8 +28,10 @@ export const Footer: React.FC<Props> = ({ language, onNavigate }) => {
             </p>
             <p className="text-xs text-slate-400 leading-relaxed mb-4">
               {isKn
-                ? 'ಗಂಗಾವತಿ ಮತ್ತು ಸುತ್ತಮುತ್ತಲಿನ ಗ್ರಾಮೀಣ ಪ್ರದೇಶದ ಕುಟುಂಬಗಳಿಗೆ ಪಾರದರ್ಶಕ, ಪ್ರಾಮಾಣಿಕ ಜೀವ ವಿಮಾ ಮಾರ್ಗದರ್ಶನ.'
-                : 'Ethical, objective life insurance advisory for families across Gangavathi and surrounding Karnataka taluks.'}
+                ? 'ಸಿಂಧನೂರು ಮತ್ತು ಸುತ್ತಮುತ್ತಲಿನ ಗ್ರಾಮೀಣ ಪ್ರದೇಶದ ಕುಟುಂಬಗಳಿಗೆ ಪಾರದರ್ಶಕ, ಪ್ರಾಮಾಣಿಕ ಜೀವ ವಿಮಾ ಮಾರ್ಗದರ್ಶನ.'
+                : isTe
+                ? 'సింధనూరు మరియు పరిసర ప్రాంతాల కుటుంబాలకు పారదర్శక, నమ్మకమైన జీవిత బీమా సలహాలు.'
+                : 'Ethical, objective life insurance advisory for families across Sindhanur, Raichur District, and surrounding Karnataka hubs.'}
             </p>
 
             <div className="space-y-2 text-xs text-slate-400">

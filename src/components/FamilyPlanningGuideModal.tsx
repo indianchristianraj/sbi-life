@@ -1171,7 +1171,7 @@ export const FamilyPlanningGuideModal: React.FC<Props> = ({
                   {isKn ? 'ಪಾಲಿಸಿ ಪ್ರಾರಂಭವಾದ ನಂತರವೂ ಸಂಘಟಿತವಾಗಿರಿ.' : 'Stay organised after your policy starts.'}
                 </h2>
                 <p className="text-xs text-slate-600">
-                  {isKn ? 'ಸೋಫಿಯಾ ರಾಣಿ ಅವರ ಹಾಲಿ ಗ್ರಾಹಕ ಸೇವಾ ಬೆಂಬಲ:' : 'Complimentary lifecycle assistance across Gangavathi:'}
+                  {isKn ? 'ಸೋಫಿಯಾ ರಾಣಿ ಅವರ ಹಾಲಿ ಗ್ರಾಹಕ ಸೇವಾ ಬೆಂಬಲ:' : 'Complimentary lifecycle assistance across Sindhanur & regional hubs:'}
                 </p>
               </div>
 
@@ -1206,7 +1206,7 @@ export const FamilyPlanningGuideModal: React.FC<Props> = ({
                   {isKn ? 'ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳನ್ನು ಸೋಫಿಯಾ ರಾಣಿ ಅವರೊಂದಿಗೆ ಚರ್ಚಿಸಿ.' : 'Discuss your questions with Sofia Rani.'}
                 </h2>
                 <p className="text-xs text-slate-600">
-                  {isKn ? 'ಗಂಗಾವತಿಯಲ್ಲಿ ಸ್ಥಳೀಯವಾಗಿ ಲಭ್ಯವಿರುವ ವೃತ್ತಿಪರ ಸಲಹೆಗಾರ್ತಿ:' : 'Authorized individual advisor operating in Gangavathi, Karnataka:'}
+                  {isKn ? 'ಸಿಂಧನೂರಿನಲ್ಲಿ ಸ್ಥಳೀಯವಾಗಿ ಲಭ್ಯವಿರುವ ವೃತ್ತಿಪರ ಸಲಹೆಗಾರ್ತಿ:' : 'Authorized individual advisor operating in Sindhanur, Raichur District, Karnataka:'}
                 </p>
               </div>
 

@@ -39,11 +39,11 @@ const INITIAL_DEMO_LEADS: LeadRecord[] = [
     createdAt: '2026-11-06T10:15:00.000Z',
     name: 'Suresh Patil',
     phone: '9845012345',
-    city: 'Gangavathi',
+    city: 'Sindhanur',
     preferredLanguage: 'kn',
     topic: 'Family Protection (Term Insurance)',
     preferredCallbackTime: 'Morning (9:30 AM - 12:00 PM IST)',
-    notes: 'Father of two children, has home loan in Gangavathi. Interested in 1 Cr term cover.',
+    notes: 'Father of two children, has business and home in Sindhanur. Interested in 1 Cr term cover.',
     stage: 'Contact Attempted',
     consultationConsent: true,
     consultationConsentTimestamp: '2026-11-06T10:15:00.000Z',
@@ -57,7 +57,7 @@ const INITIAL_DEMO_LEADS: LeadRecord[] = [
     createdAt: '2026-11-05T14:30:00.000Z',
     name: 'Lakshmi Narayan',
     phone: '7899014523',
-    city: 'Karatagi',
+    city: 'Turvihal',
     preferredLanguage: 'kn',
     topic: 'Child Higher Education Planning',
     preferredCallbackTime: 'Afternoon (12:00 PM - 3:30 PM IST)',
@@ -66,7 +66,7 @@ const INITIAL_DEMO_LEADS: LeadRecord[] = [
     consultationConsent: true,
     consultationConsentTimestamp: '2026-11-05T14:30:00.000Z',
     marketingConsent: false,
-    leadSource: 'Web Form (Gangavathi Hub)',
+    leadSource: 'Web Form (Sindhanur Advisory Base)',
     nextFollowUpDate: '2026-11-10',
   },
   {
@@ -74,7 +74,7 @@ const INITIAL_DEMO_LEADS: LeadRecord[] = [
     createdAt: '2026-11-04T16:45:00.000Z',
     name: 'Venkatesh Rao',
     phone: '9448123987',
-    city: 'Koppal',
+    city: 'Maski',
     preferredLanguage: 'en',
     topic: 'Retirement & Pension Planning',
     preferredCallbackTime: 'Evening (3:30 PM - 6:30 PM IST)',
@@ -111,7 +111,7 @@ const INITIAL_DEMO_APPOINTMENTS: AppointmentSlot[] = [
     durationMinutes: 30,
     topic: 'Existing Policy Nominee Update Guidance',
     status: 'Confirmed',
-    meetingType: 'In-person (Gangavathi)',
+    meetingType: 'In-person (Sindhanur)',
     createdAt: '2026-11-06T09:00:00.000Z',
   },
 ];
@@ -121,7 +121,7 @@ const INITIAL_AUDIT_LOGS: AuditLogItem[] = [
     id: 'audit_init_1',
     timestamp: '10:00 AM IST',
     actor: 'System Initialization',
-    action: 'Phase 1 Preview Initialized',
+    action: 'Advisory Platform Initialized',
     details: 'Loaded Sofia Rani advisory environment with trilingual localization and planning tools.',
   },
 ];
@@ -130,9 +130,9 @@ const INITIAL_DEMO_TESTIMONIALS: TestimonialItem[] = [
   {
     id: 'test_001',
     clientName: 'Rajeshwar B.',
-    city: 'Gangavathi',
+    city: 'Sindhanur',
     serviceCategory: 'Family Protection',
-    feedbackKn: 'ಗಂಗಾವತಿಯಲ್ಲಿ ನಮ್ಮ ಕುಟುಂಬದ ಮಾಸಿಕ ವೆಚ್ಚ ಮತ್ತು ಸಾಲಗಳನ್ನು ಆಧರಿಸಿ ಎಷ್ಟು ಟರ್ಮ್ ಕವರ್ ಬೇಕು ಎಂಬುದನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ಕನ್ನಡದಲ್ಲೇ ವಿವರಿಸಿದರು.',
+    feedbackKn: 'ಸಿಂಧನೂರಿನಲ್ಲಿ ನಮ್ಮ ಕುಟುಂಬದ ಮಾಸಿಕ ವೆಚ್ಚ ಮತ್ತು ಸಾಲಗಳನ್ನು ಆಧರಿಸಿ ಎಷ್ಟು ಟರ್ಮ್ ಕವರ್ ಬೇಕು ಎಂಬುದನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ಕನ್ನಡದಲ್ಲೇ ವಿವರಿಸಿದರು.',
     feedbackEn: 'Sofia explained our family protection gap clearly in Kannada, calculating our coverage needs realistically without pressure.',
     verifiedDate: 'Oct 2026',
     isApproved: true,
@@ -140,7 +140,7 @@ const INITIAL_DEMO_TESTIMONIALS: TestimonialItem[] = [
   {
     id: 'test_002',
     clientName: 'Sunita M.',
-    city: 'Hospet / Gangavathi',
+    city: 'Maski / Sindhanur',
     serviceCategory: 'Child Education Planning',
     feedbackKn: 'ಮಗಳ ಮುಂದಿನ ಇಂಜಿನಿಯರಿಂಗ್ ಶಿಕ್ಷಣಕ್ಕೆ ಹಣದುಬ್ಬರದ ಲೆಕ್ಕಾಚಾರ ಮಾಡಿ ಉಳಿತಾಯ ಗುರಿಯನ್ನು ಯೋಜಿಸಲು ಸೋಫಿಯಾ ರಾಣಿ ಅವರ ಮಾರ್ಗದರ್ಶನ ನೆರವಾಯಿತು.',
     feedbackEn: 'The education inflation planning gave our family genuine clarity on planning our daughter’s college fund step-by-step.',
@@ -245,7 +245,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-[#0F1D36] selection:bg-teal-100 selection:text-teal-900">
+    <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-[#0F1D36] selection:bg-teal-100 selection:text-teal-900 w-full max-w-full overflow-x-hidden">
       {/* Top Navigation Bar */}
       <Header
         currentRoute={currentRoute}

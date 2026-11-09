@@ -22,7 +22,7 @@ export const DisclosuresView: React.FC<Props> = ({ language }) => {
           {isKn ? 'ಕಾನೂನು ಬಹಿರಂಗಪಡಿಸುವಿಕೆ & ನಿಯಮಗಳು' : 'Mandatory Disclosures & Terms of Advisory'}
         </h1>
         <p className="text-xs text-slate-500">
-          Individual Life Insurance Advisory Governance · Gangavathi, Karnataka
+          Individual Life Insurance Advisory Governance · Sindhanur, Raichur District, Karnataka
         </p>
       </div>
 

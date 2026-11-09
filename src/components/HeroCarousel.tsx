@@ -36,6 +36,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   className = '',
 }) => {
   const isKn = language === 'kn';
+  const isTe = language === 'te';
   const visibleSlides = slides.filter((s) => s.isVisible);
   const totalSlides = visibleSlides.length;
 
@@ -394,7 +395,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                     )}
                     <img
                       src={slide.desktopImage}
-                      alt={isKn ? slide.imageAltKn : slide.imageAltEn}
+                      alt={isKn ? slide.imageAltKn : isTe ? (slide.imageAltTe || slide.imageAltEn) : slide.imageAltEn}
                       loading={idx === 0 ? 'eager' : 'lazy'}
                       decoding="async"
                       className={`w-full h-full object-cover ${focalClass} scale-[1.01] ${
@@ -415,22 +416,30 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-semibold backdrop-blur-xs border border-teal-400/30">
                       <ShieldCheck className="w-3.5 h-3.5 text-teal-400 shrink-0" />
                       <span className="font-bold text-white">
-                        {isKn ? slide.titleKn || slide.titleEn : slide.titleEn}
+                        {isKn ? (slide.titleKn || slide.titleEn) : isTe ? (slide.titleTe || slide.titleEn) : slide.titleEn}
                       </span>
                       <span className="text-teal-400/60">·</span>
                       <span className="text-teal-200 font-normal">
-                        {isKn ? slide.taglineKn : slide.taglineEn}
+                        {isKn ? slide.taglineKn : isTe ? (slide.taglineTe || slide.taglineEn) : slide.taglineEn}
                       </span>
                     </div>
 
                     {/* Headline */}
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.18] text-white text-balance drop-shadow-xs">
-                      {isKn ? (slide.headlineKn || slide.headline) : (slide.headlineEn || slide.headline)}
+                      {isKn
+                        ? (slide.headlineKn || slide.headline)
+                        : isTe
+                        ? (slide.headlineTe || slide.headlineEn || slide.headline)
+                        : (slide.headlineEn || slide.headline)}
                     </h1>
 
                     {/* Supporting Copy */}
                     <p className="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed max-w-xl font-normal drop-shadow-2xs">
-                      {isKn ? (slide.supportingKn || slide.subHeadlineKn || slide.subHeadline) : (slide.supportingEn || slide.subHeadlineEn || slide.subHeadline)}
+                      {isKn
+                        ? (slide.supportingKn || slide.subHeadlineKn || slide.subHeadline)
+                        : isTe
+                        ? (slide.supportingTe || slide.subHeadlineTe || slide.supportingEn || slide.subHeadline)
+                        : (slide.supportingEn || slide.subHeadlineEn || slide.subHeadline)}
                     </p>
 
                     {/* Actions Area */}
@@ -441,7 +450,11 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                         className="min-h-[44px] px-6 py-3.5 bg-teal-600 hover:bg-teal-500 active:bg-teal-700 text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer transform active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-teal-400"
                       >
                         <span>
-                          {isKn ? slide.primaryActionLabelKn : slide.primaryActionLabelEn}
+                          {isKn
+                            ? slide.primaryActionLabelKn
+                            : isTe
+                            ? (slide.primaryActionLabelTe || slide.primaryActionLabelEn)
+                            : slide.primaryActionLabelEn}
                         </span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
@@ -461,6 +474,8 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
                           <span>
                             {isKn
                               ? slide.secondaryActionLabelKn
+                              : isTe
+                              ? (slide.secondaryActionLabelTe || slide.secondaryActionLabelEn)
                               : slide.secondaryActionLabelEn}
                           </span>
                         </button>

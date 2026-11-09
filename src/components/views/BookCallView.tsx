@@ -22,7 +22,7 @@ export const BookCallView: React.FC<Props> = ({
   const isKn = language === 'kn';
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 pb-24">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 pb-24 w-full max-w-full overflow-hidden">
       {/* Title */}
       <div className="text-center max-w-2xl mx-auto space-y-2">
         <span className="text-xs font-semibold uppercase tracking-wider text-teal-800">
@@ -33,8 +33,8 @@ export const BookCallView: React.FC<Props> = ({
         </h1>
         <p className="text-xs sm:text-sm text-slate-600">
           {isKn
-            ? 'ನಿಮ್ಮ ಕುಟುಂಬದ ರಕ್ಷಣಾ ಅಗತ್ಯಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಮತ್ತು ಗಂಗಾವತಿಯಲ್ಲಿ ಅಧಿಕೃತ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಲು ಮುಕ್ತವಾಗಿ ಮಾತನಾಡಿ.'
-            : 'Get clear, objective life advisory tailored to your family milestones without sales pressure.'}
+            ? 'ನಿಮ್ಮ ಕುಟುಂಬದ ರಕ್ಷಣಾ ಅಗತ್ಯಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಮತ್ತು ಸಿಂಧನೂರು ಹಾಗೂ ಸುತ್ತಮುತ್ತಲಿನ ಪ್ರದೇಶಗಳಿಗೆ ಅಧಿಕೃತ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಲು ಮುಕ್ತವಾಗಿ ಮಾತನಾಡಿ.'
+            : 'Get clear, objective life advisory tailored to your family milestones without sales pressure in Sindhanur and surrounding areas.'}
         </p>
       </div>
 

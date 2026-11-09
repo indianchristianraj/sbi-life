@@ -30,6 +30,7 @@ export const Header: React.FC<Props> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = TRANSLATIONS[language];
   const isKn = language === 'kn';
+  const isTe = language === 'te';
 
   const handleNav = (route: PublicRoute) => {
     setCurrentRoute(route);
@@ -70,7 +71,11 @@ export const Header: React.FC<Props> = ({
                   {ADVISOR_CONFIG.name}
                 </span>
                 <span className="text-[11px] font-medium text-slate-500 tracking-normal hidden sm:block">
-                  {isKn ? 'ಎಸ್.ಬಿ.ಐ ಲೈಫ್ ಅಧಿಕೃತ ಸಲಹೆಗಾರ್ತಿ · ಗಂಗಾವತಿ' : 'SBI Life Authorized Advisor · Gangavathi'}
+                  {isKn
+                    ? 'ಎಸ್.ಬಿ.ಐ ಲೈಫ್ ಅಧಿಕೃತ ಸಲಹೆಗಾರ್ತಿ · ಸಿಂಧನೂರು'
+                    : isTe
+                    ? 'ఎస్.బి.ఐ లైఫ్ అధికృత సలహాదారు · సింధనూరు'
+                    : 'SBI Life Authorized Advisor · Sindhanur'}
                 </span>
               </div>
             </button>

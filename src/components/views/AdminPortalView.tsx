@@ -127,7 +127,7 @@ export const AdminPortalView: React.FC<Props> = ({
   // Testimonial management state
   const [showAddTestimonialModal, setShowAddTestimonialModal] = useState(false);
   const [newClientName, setNewClientName] = useState('');
-  const [newClientCity, setNewClientCity] = useState('Gangavathi');
+  const [newClientCity, setNewClientCity] = useState('Sindhanur');
   const [newServiceCategory, setNewServiceCategory] = useState('Family Protection (Term Insurance)');
   const [newFeedbackKn, setNewFeedbackKn] = useState('');
   const [newFeedbackEn, setNewFeedbackEn] = useState('');
@@ -440,7 +440,7 @@ export const AdminPortalView: React.FC<Props> = ({
             Sofia Rani · Lead & Appointment Management
           </h1>
           <p className="text-xs text-slate-400">
-            Gangavathi Hub · Asia/Kolkata (IST) · Real-time Session Records & Customer Enquiries
+            Sindhanur Hub · Asia/Kolkata (IST) · Real-time Session Records & Customer Enquiries
           </p>
         </div>
 
@@ -617,7 +617,7 @@ export const AdminPortalView: React.FC<Props> = ({
             <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 text-xs">
               <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-500">
                 <span className="font-medium text-slate-600">Quick city filter:</span>
-                {['Gangavathi', 'Karatagi', 'Kanakagiri', 'Kampli', 'Koppal'].map((city) => {
+                {['Sindhanur', 'Turvihal', 'Maski', 'Manvi', 'Siruguppa', 'Gangavathi', 'Raichur'].map((city) => {
                   const isSelected = searchQuery.toLowerCase() === city.toLowerCase();
                   return (
                     <button

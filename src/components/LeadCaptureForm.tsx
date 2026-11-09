@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Phone, CheckCircle, AlertCircle, Calendar, Clock, Shield, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Phone, CheckCircle, AlertCircle, Calendar, Clock, Shield, ArrowRight, MessageCircle } from 'lucide-react';
 import { Language, LeadRecord } from '../types';
-import { TRANSLATIONS } from '../i18n/translations';
 import { ADVISOR_CONFIG } from '../config/advisorConfig';
 
 interface Props {
@@ -22,13 +21,15 @@ export const LeadCaptureForm: React.FC<Props> = ({
   isCallbackRequestOnly = false,
 }) => {
   const isKn = language === 'kn';
+  const isTe = language === 'te';
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [city, setCity] = useState(prefilledCity || 'Gangavathi');
+  const [city, setCity] = useState(prefilledCity || 'Sindhanur');
   const [prefLanguage, setPrefLanguage] = useState<Language>(language);
   const [topic, setTopic] = useState(prefilledTopic || 'Family Protection (Term Insurance)');
   const [callbackTime, setCallbackTime] = useState('Morning (9:30 AM - 12:00 PM IST)');
+  const [contactMethod, setContactMethod] = useState<'Phone Call' | 'WhatsApp' | 'In-person'>('Phone Call');
   
   // Consent controls - NEVER PRESELECTED
   const [consultationConsent, setConsultationConsent] = useState(false);
@@ -42,10 +43,28 @@ export const LeadCaptureForm: React.FC<Props> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [receiptLead, setReceiptLead] = useState<LeadRecord | null>(null);
 
+  // Synchronize city when user clicks location cards
+  useEffect(() => {
+    if (prefilledCity) {
+      setCity(prefilledCity);
+    }
+  }, [prefilledCity]);
+
+  // Synchronize topic when passed as prop
+  useEffect(() => {
+    if (prefilledTopic) {
+      setTopic(prefilledTopic);
+    }
+  }, [prefilledTopic]);
+
   const validate = () => {
     const errs: Record<string, string> = {};
     if (!name.trim() || name.trim().length < 2) {
-      errs.name = isKn ? 'ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ' : 'Please enter your full name (minimum 2 characters)';
+      errs.name = isKn
+        ? 'ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ (ಕನಿಷ್ಠ 2 ಅಕ್ಷರಗಳು)'
+        : isTe
+        ? 'దయచేసి మీ పూర్తి పేరు నమోదు చేయండి (కనీసం 2 అక్షరాలు)'
+        : 'Please enter your full name (minimum 2 characters)';
     }
 
     // Indian 10-digit mobile number validation
@@ -54,12 +73,16 @@ export const LeadCaptureForm: React.FC<Props> = ({
     if (!validIndianMobile) {
       errs.phone = isKn
         ? 'ದಯವಿಟ್ಟು ಮಾನ್ಯವಾದ 10-ಅಂಕಿಯ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ (6, 7, 8 ಅಥವಾ 9 ರಿಂದ ಪ್ರಾರಂಭವಾಗುವ)'
+        : isTe
+        ? 'దయచేసి చెల్లుబాటు అయ్యే 10 అంకెల భారతీయ మొబైల్ నంబర్ నమోదు చేయండి'
         : 'Please enter a valid 10-digit Indian mobile number (starting with 6, 7, 8, or 9)';
     }
 
     if (!consultationConsent) {
       errs.consent = isKn
         ? 'ಮುಂದುವರಿಯಲು ಸಮಾಲೋಚನಾ ಸಂಪರ್ಕ ಸಮ್ಮತಿಯನ್ನು ಆಯ್ಕೆ ಮಾಡುವುದು ಕಡ್ಡಾಯವಾಗಿದೆ'
+        : isTe
+        ? 'ముందుకు సాగడానికి సంప్రదింపు సమ్మతిని ఎంచుకోవడం తప్పనిసరి'
         : 'Mandatory: Please provide consent to receive a callback from Sofia Rani regarding this enquiry';
     }
 
@@ -90,14 +113,14 @@ export const LeadCaptureForm: React.FC<Props> = ({
       city,
       preferredLanguage: prefLanguage,
       topic,
-      preferredCallbackTime: callbackTime,
-      notes: prefilledNotes || 'Direct enquiry from public website',
+      preferredCallbackTime: `${callbackTime} via ${contactMethod}`,
+      notes: prefilledNotes || `Direct enquiry from public website for ${city} (Preferred Method: ${contactMethod})`,
       stage: 'New',
       consultationConsent: true,
       consultationConsentTimestamp: nowIso,
       marketingConsent,
       marketingConsentTimestamp: marketingConsent ? nowIso : undefined,
-      leadSource: 'Web Form (Gangavathi Hub)',
+      leadSource: 'Web Form (Sindhanur Advisory Base)',
     };
 
     setTimeout(() => {
@@ -111,93 +134,82 @@ export const LeadCaptureForm: React.FC<Props> = ({
 
   if (receiptLead) {
     return (
-      <div className="bg-white rounded-2xl border border-teal-200/80 p-6 md:p-8 shadow-sm">
+      <div className="bg-white rounded-2xl border border-teal-200/80 p-6 md:p-8 shadow-sm w-full max-w-full overflow-hidden">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-800 flex items-center justify-center shrink-0">
             <CheckCircle className="w-6 h-6 text-teal-700" />
           </div>
           <div>
             <span className="text-xs font-semibold text-teal-800 uppercase tracking-wider block">
-              {isKn ? 'ಮನವಿ ಸ್ವೀಕೃತಿ ರಶೀದಿ' : 'Enquiry Receipt Generated'}
+              {isKn ? 'ವಿನಂತಿ ಯಶಸ್ವಿಯಾಗಿ ದಾಖಲಾಗಿದೆ' : isTe ? 'అభ్యర్థన నమోదు చేయబడింది' : 'Enquiry Recorded Successfully'}
             </span>
-            <h3 className="text-lg md:text-xl font-bold text-slate-900">
-              {isKn ? 'ನಿಮ್ಮ ಸಮಾಲೋಚನಾ ಮನವಿ ಯಶಸ್ವಿಯಾಗಿ ದಾಖಲಾಗಿದೆ' : 'Consultation Request Logged'}
-            </h3>
+            <h4 className="text-lg font-bold text-slate-900">
+              {isKn ? 'ಧನ್ಯವಾದಗಳು, ನಿಮ್ಮ ಸಮಾಲೋಚನೆ ನಿಗದಿಯಾಗಿದೆ' : isTe ? 'ధన్యవాదాలు, మీ అభ్యర్థన అందింది' : 'Thank you, Sofia Rani will connect with you'}
+            </h4>
           </div>
         </div>
 
-        {/* Customer Trust & Privacy Assurance */}
-        <div className="bg-teal-50/80 border border-teal-200/80 rounded-xl p-4 text-xs text-teal-900 mb-6 space-y-1.5">
-          <div className="font-bold flex items-center gap-1.5 text-teal-950">
-            <Shield className="w-4 h-4 text-teal-700 shrink-0" />
-            <span>{isKn ? 'ಗೌಪ್ಯತೆ & ಸೇವಾ ಭರವಸೆ' : 'Advisory Confirmation & Privacy Guarantee'}</span>
+        <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 text-xs space-y-2 mb-4">
+          <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+            <span className="text-slate-500">{isKn ? 'ವಿಚಾರಣಾ ಸಂಖ್ಯೆ' : isTe ? 'రిఫరెన్స్ నంబర్' : 'Reference ID'}:</span>
+            <span className="font-mono font-bold text-slate-800">{receiptLead.id}</span>
           </div>
-          <p className="leading-relaxed text-teal-900/90">
+          <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+            <span className="text-slate-500">{isKn ? 'ಹೆಸರು' : isTe ? 'పేరు' : 'Name'}:</span>
+            <span className="font-semibold text-slate-800">{receiptLead.name}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+            <span className="text-slate-500">{isKn ? 'ಮೊಬೈಲ್' : isTe ? 'మొబైల్' : 'Mobile'}:</span>
+            <span className="font-mono text-slate-800 tabular-nums">+91 {receiptLead.phone}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+            <span className="text-slate-500">{isKn ? 'ಸ್ಥಳ' : isTe ? 'ప్రాంతం' : 'Location'}:</span>
+            <span className="font-semibold text-slate-800">{receiptLead.city}</span>
+          </div>
+          <div className="flex justify-between border-b border-slate-200/80 pb-1.5">
+            <span className="text-slate-500">{isKn ? 'ವಿಷಯ' : isTe ? 'విషయం' : 'Topic'}:</span>
+            <span className="font-semibold text-teal-800">{receiptLead.topic}</span>
+          </div>
+          <div className="flex justify-between pt-0.5">
+            <span className="text-slate-500">{isKn ? 'ಸಮಯ & ಮಾಧ್ಯಮ' : isTe ? 'సమయం & విధానం' : 'Scheduled Window'}:</span>
+            <span className="text-slate-800">{receiptLead.preferredCallbackTime}</span>
+          </div>
+        </div>
+
+        <div className="bg-emerald-50 rounded-xl p-3.5 border border-emerald-200/80 text-xs text-emerald-950 mb-5">
+          <p className="leading-relaxed">
             {isKn
-              ? 'ನಿಮ್ಮ ಸಮಾಲೋಚನಾ ಮನವಿಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ. ಸೋಫಿಯಾ ರಾಣಿ ಅವರು ನಿಮ್ಮ ಆಯ್ಕೆಯ ಸಮಯದಲ್ಲಿ ಖುದ್ದಾಗಿ ಸಂಪರ್ಕಿಸುತ್ತಾರೆ. ಭಾರತ ಸರ್ಕಾರದ DPDP ಕಾಯ್ದೆ 2023 ರ ಅಡಿಯಲ್ಲಿ ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ವಿವರಗಳನ್ನು ಸಂಪೂರ್ಣ ಗೌಪ್ಯವಾಗಿಡಲಾಗುತ್ತದೆ.'
-              : 'Your consultation request has been securely recorded. Sofia Rani will personally connect with you at your chosen callback window. Your data is protected under the Digital Personal Data Protection (DPDP) Act 2023.'}
+              ? 'ಸೋಫಿಯಾ ರಾಣಿ ಅವರು ನಿಮ್ಮ ಆಯ್ಕೆಯ ಸಮಯದಲ್ಲಿ ನಿಮ್ಮೊಂದಿಗೆ ಸಮಾಲೋಚನೆ ನಡೆಸಲಿದ್ದಾರೆ. ನಿಮಗೆ ತಕ್ಷಣವೇ ಮಾತನಾಡಬೇಕಿದ್ದಲ್ಲಿ, ಕೆಳಗಿನ ಅಧಿಕೃತ ಸಂಖ್ಯೆಗೆ ನೇರವಾಗಿ ಕರೆ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮಾಡಬಹುದು.'
+              : isTe
+              ? 'సోఫియా రాణి గారు మీరు ఎంచుకున్న సమయంలో సంప్రదిస్తారు. అత్యవసరమైతే క్రింది బటన్ ద్వారా నేరుగా వాట్సాప్ చేయవచ్చు.'
+              : 'Sofia Rani will review your requirements and reach out during your preferred window. For immediate assistance, message directly on WhatsApp.'}
           </p>
         </div>
 
-        {/* Receipt Details */}
-        <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 text-xs space-y-2 mb-6">
-          <div className="flex justify-between border-b border-slate-200/80 pb-2">
-            <span className="text-slate-500">{isKn ? 'ಹೆಸರು:' : 'Enquirer Name:'}</span>
-            <span className="font-semibold text-slate-800">{receiptLead.name}</span>
-          </div>
-          <div className="flex justify-between border-b border-slate-200/80 pb-2">
-            <span className="text-slate-500">{isKn ? 'ಸಂಪರ್ಕ ಸಂಖ್ಯೆ:' : 'Contact Phone:'}</span>
-            <span className="font-semibold text-slate-800">XXXXXX{receiptLead.phone.slice(-4)}</span>
-          </div>
-          <div className="flex justify-between border-b border-slate-200/80 pb-2">
-            <span className="text-slate-500">{isKn ? 'ಆದ್ಯತೆಯ ವಿಷಯ:' : 'Discussion Topic:'}</span>
-            <span className="font-semibold text-slate-800">{receiptLead.topic}</span>
-          </div>
-          <div className="flex justify-between border-b border-slate-200/80 pb-2">
-            <span className="text-slate-500">{isKn ? 'ಸೂಚಿಸಿದ ಸಮಯ:' : 'Requested Window:'}</span>
-            <span className="font-semibold text-teal-800">{receiptLead.preferredCallbackTime}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-slate-500">{isKn ? 'ಸೇವಾ ಸ್ಥಳ:' : 'Location:'}</span>
-            <span className="font-semibold text-slate-800">{receiptLead.city}</span>
-          </div>
-        </div>
-
-        {/* Next Steps */}
-        <div className="text-xs text-slate-600 space-y-2 mb-6">
-          <h4 className="font-semibold text-slate-800">{isKn ? 'ಮುಂದಿನ ಹಂತಗಳು:' : 'Next Steps:'}</h4>
-          <ul className="list-disc list-inside space-y-1 text-slate-600 pl-1">
-            <li>
-              {isKn
-                ? `ಸೋಫಿಯಾ ರಾಣಿ ಅವರು ಅಧಿಕೃತ ಕೆಲಸದ ಸಮಯದಲ್ಲಿ (${ADVISOR_CONFIG.workingHours.timingsKn}) ನಿಮ್ಮೊಂದಿಗೆ ಫೋನ್ ಮೂಲಕ ಸಂಪರ್ಕ ಸಾಧಿಸಲಿದ್ದಾರೆ.`
-                : `Sofia Rani will initiate contact during official hours (${ADVISOR_CONFIG.workingHours.timings}).`}
-            </li>
-            <li>
-              {isKn
-                ? 'ಸಮಾಲೋಚನೆ ಸಂಪೂರ್ಣ ಉಚಿತವಾಗಿರುತ್ತದೆ. ಯಾವುದೇ ಮುಂಗಡ ಶುಲ್ಕ ಅಥವಾ ಬ್ಯಾಂಕ್ ಖಾತೆ ವಿವರಗಳನ್ನು ಯಾರೊಂದಿಗೂ ಹಂಚಿಕೊಳ್ಳಬೇಡಿ.'
-                : 'Initial advisory discussions are free and confidential. Never share OTP or banking passwords.'}
-            </li>
-          </ul>
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row gap-2.5">
           <button
             type="button"
-            onClick={() => setReceiptLead(null)}
-            className="flex-1 py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+            onClick={() => {
+              setReceiptLead(null);
+              setName('');
+              setPhone('');
+              setConsultationConsent(false);
+              setMarketingConsent(false);
+            }}
+            className="flex-1 py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg transition-colors cursor-pointer text-center"
           >
-            {isKn ? 'ಮತ್ತೊಂದು ವಿಚಾರಣೆ ಸಲ್ಲಿಸಿ' : 'Submit Another Enquiry'}
+            {isKn ? 'ಮತ್ತೊಂದು ವಿಚಾರಣೆ ಸಲ್ಲಿಸಿ' : isTe ? 'మరొక అభ్యర్థన' : 'Submit Another Request'}
           </button>
           <a
             href={`https://wa.me/${ADVISOR_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
-              `Hello Sofia Rani, I just requested a callback regarding ${receiptLead.topic}. Name: ${receiptLead.name}`
+              `Hello Sofia Rani, I just requested a consultation regarding ${receiptLead.topic} for ${receiptLead.city}. Name: ${receiptLead.name}`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 py-2.5 px-4 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors"
+            className="flex-1 py-2.5 px-4 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
           >
-            <span>{isKn ? 'ತಕ್ಷಣ ವಾಟ್ಸಾಪ್ ಸಂದೇಶ ಕಳುಹಿಸಿ' : 'Message on WhatsApp Now'}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <MessageCircle className="w-3.5 h-3.5" />
+            <span>{isKn ? 'ತಕ್ಷಣ ವಾಟ್ಸಾಪ್ ಸಂದೇಶ ಕಳುಹಿಸಿ' : isTe ? 'వాట్సాప్‌లో సందేశం' : 'Message on WhatsApp Now'}</span>
           </a>
         </div>
       </div>
@@ -205,25 +217,37 @@ export const LeadCaptureForm: React.FC<Props> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-200/80 p-6 md:p-8 shadow-sm">
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-200/80 p-6 md:p-8 shadow-sm w-full max-w-full overflow-hidden">
       <div className="mb-6">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-teal-800 mb-1">
-          <Calendar className="w-4 h-4 text-teal-700" />
-          <span>{isKn ? 'ಸ್ವಯಂಪ್ರೇರಿತ ಸಮಾಲೋಚನೆ' : 'Voluntary Advisory Request'}</span>
+          <Calendar className="w-4 h-4 text-teal-700 shrink-0" />
+          <span>
+            {isKn
+              ? 'ಸ್ವಯಂಪ್ರೇರಿತ ಸಮಾಲೋಚನೆ · ಸಿಂಧನೂರು ಕೇಂದ್ರ'
+              : isTe
+              ? 'స్వచ్ఛంద సలహా అభ్యర్థన · సింధనూరు'
+              : 'Voluntary Advisory Request · Sindhanur Base'}
+          </span>
         </div>
         <h3 className="text-xl md:text-2xl font-bold text-slate-900">
           {isCallbackRequestOnly
             ? isKn
               ? 'ಮರಳಿ ಕರೆ ಮಾಡಲು ವಿನಂತಿಸಿ (Callback Request)'
+              : isTe
+              ? 'కాల్‌బ్యాక్ అభ్యర్థించండి'
               : 'Request a Callback from Sofia Rani'
             : isKn
             ? 'ಸೋಫಿಯಾ ರಾಣಿ ಅವರೊಂದಿಗೆ ಸಮಾಲೋಚನೆ ನಿಗದಿಪಡಿಸಿ'
-            : 'Schedule a Conversation with Sofia Rani'}
+            : isTe
+            ? 'సోఫియా రాణి గారితో సమాలోచన షెడ్యూల్ చేయండి'
+            : 'Schedule a Consultation with Sofia Rani'}
         </h3>
         <p className="text-xs md:text-sm text-slate-600 mt-1">
           {isKn
             ? 'ಯಾವುದೇ ಮಾರಾಟ ಒತ್ತಡವಿಲ್ಲ. ನಿಮ್ಮ ಕುಟುಂಬದ ಭದ್ರತೆಗೆ ಅಗತ್ಯವಾದ ಪಾರದರ್ಶಕ ಮಾಹಿತಿಯನ್ನು ಮುಕ್ತವಾಗಿ ಚರ್ಚಿಸಿ.'
-            : 'Clear, confidential discussion without sales pressure. We respect your time and privacy.'}
+            : isTe
+            ? 'ఎలాంటి అమ్మకాల ఒత్తిడి లేకుండా మీ కుటుంబానికి సరైన బీమా వివరాలను ప్రశాంతంగా తెలుసుకోండి.'
+            : 'Clear, confidential discussion without sales pressure. Serving Sindhanur and surrounding areas.'}
         </p>
       </div>
 
@@ -243,13 +267,13 @@ export const LeadCaptureForm: React.FC<Props> = ({
         {/* Full Name */}
         <div>
           <label htmlFor="lead-name" className="block text-xs font-medium text-slate-800 mb-1">
-            {isKn ? 'ನಿಮ್ಮ ಹೆಸರು *' : 'Full Name *'}
+            {isKn ? 'ನಿಮ್ಮ ಹೆಸರು *' : isTe ? 'మీ పేరు *' : 'Full Name *'}
           </label>
           <input
             id="lead-name"
             type="text"
             required
-            placeholder={isKn ? 'ಉದಾ: ರಮೇಶ್ ಕುಮಾರ್' : 'e.g. Ramesh Kumar'}
+            placeholder={isKn ? 'ಉದಾ: ರಮೇಶ್ ಕುಮಾರ್' : isTe ? 'ఉదా: రమేష్ కుమార్' : 'e.g. Ramesh Kumar'}
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={`w-full px-3.5 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 ${
@@ -262,7 +286,7 @@ export const LeadCaptureForm: React.FC<Props> = ({
         {/* 10-digit Phone */}
         <div>
           <label htmlFor="lead-phone" className="block text-xs font-medium text-slate-800 mb-1">
-            {isKn ? 'ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (10 ಅಂಕಿಗಳು) *' : 'Mobile Number (10 digits) *'}
+            {isKn ? 'ಮೊಬೈಲ್ ಸಂಖ್ಯೆ (10 ಅಂಕಿಗಳು) *' : isTe ? 'మొబైల్ నంబర్ (10 అంకెలు) *' : 'Mobile Number (10 digits) *'}
           </label>
           <div className="relative">
             <span className="absolute left-3 top-2 text-sm text-slate-500 font-medium">+91</span>
@@ -285,7 +309,7 @@ export const LeadCaptureForm: React.FC<Props> = ({
         {/* City / Taluk */}
         <div>
           <label htmlFor="lead-city" className="block text-xs font-medium text-slate-800 mb-1">
-            {isKn ? 'ನಿಮ್ಮ ಊರು / ತಾಲೂಕು *' : 'City / Taluk *'}
+            {isKn ? 'ನಿಮ್ಮ ಊರು / ತಾಲೂಕು *' : isTe ? 'మీ ఊరు / తాలూకా *' : 'City / Taluk *'}
           </label>
           <select
             id="lead-city"
@@ -293,22 +317,30 @@ export const LeadCaptureForm: React.FC<Props> = ({
             onChange={(e) => setCity(e.target.value)}
             className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 bg-white"
           >
-            <option value="Gangavathi">Gangavathi (ಗಂಗಾವತಿ)</option>
-            <option value="Karatagi">Karatagi (ಕಾರಟಗಿ)</option>
-            <option value="Kanakagiri">Kanakagiri (ಕನಕಗಿರಿ)</option>
-            <option value="Kampli">Kampli (ಕಂಪ್ಲಿ)</option>
-            <option value="Anegundi">Anegundi (ಆನೆಗೊಂದಿ)</option>
-            <option value="Koppal">Koppal (ಕೊಪ್ಪಳ)</option>
-            <option value="Sindhanoor">Sindhanoor (ಸಿಂಧನೂರು)</option>
-            <option value="Hospet">Hospet / Vijayanagara (ಹೊಸಪೇಟೆ)</option>
-            <option value="Other">Other Region in Karnataka</option>
+            <optgroup label="Primary Service Hubs">
+              <option value="Sindhanur">Sindhanur (ಸಿಂಧನೂರು - Advisory Base)</option>
+              <option value="Turvihal">Turvihal (ತುರ್ವಿಹಾಳ)</option>
+              <option value="Maski">Maski (ಮಸ್ಕಿ)</option>
+            </optgroup>
+            <optgroup label="Nearby Hubs">
+              <option value="Manvi">Manvi (ಮಾನ್ವಿ)</option>
+              <option value="Siruguppa">Siruguppa (ಸಿರುಗುಪ್ಪ)</option>
+              <option value="Gangavathi">Gangavathi (ಗಂಗಾವತಿ)</option>
+            </optgroup>
+            <optgroup label="Extended Service Areas">
+              <option value="Raichur">Raichur (ರಾಯಚೂರು)</option>
+              <option value="Lingasugur">Lingasugur (ಲಿಂಗಸುಗೂರು)</option>
+              <option value="Koppal">Koppal (ಕೊಪ್ಪಳ)</option>
+              <option value="Sindhanur Rural">Sindhanur Rural Farming Villages</option>
+              <option value="Other">Other Region in Karnataka</option>
+            </optgroup>
           </select>
         </div>
 
         {/* Preferred Language */}
         <div>
           <label htmlFor="lead-pref-lang" className="block text-xs font-medium text-slate-800 mb-1">
-            {isKn ? 'ಮಾತನಾಡಲು ಬಯಸುವ ಭಾಷೆ *' : 'Preferred Language *'}
+            {isKn ? 'ಮಾತನಾಡಲು ಬಯಸುವ ಭಾಷೆ *' : isTe ? 'మాట్లాడాలనుకుంటున్న భాష *' : 'Preferred Language *'}
           </label>
           <select
             id="lead-pref-lang"
@@ -316,18 +348,18 @@ export const LeadCaptureForm: React.FC<Props> = ({
             onChange={(e) => setPrefLanguage(e.target.value as Language)}
             className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 bg-white"
           >
-            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+            <option value="kn">ಕನ್ನಡ (Kannada - Primary)</option>
             <option value="en">English</option>
-            <option value="te">తెలుగు (Telugu - Subject to schedule)</option>
+            <option value="te">తెలుగు (Telugu)</option>
           </select>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
-        {/* Topic */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        {/* Insurance Topic */}
         <div>
           <label htmlFor="lead-topic" className="block text-xs font-medium text-slate-800 mb-1">
-            {isKn ? 'ಸಮಾಲೋಚನೆಯ ಮುಖ್ಯ ವಿಷಯ *' : 'Primary Discussion Topic *'}
+            {isKn ? 'ಸಮಾಲೋಚನೆಯ ಮುಖ್ಯ ವಿಷಯ *' : isTe ? 'ప్రధాన చర్చాంశం *' : 'Primary Discussion Topic *'}
           </label>
           <select
             id="lead-topic"
@@ -336,57 +368,75 @@ export const LeadCaptureForm: React.FC<Props> = ({
             className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 bg-white"
           >
             <option value="Family Protection (Term Insurance)">
-              {isKn ? 'ಕುಟುಂಬ ರಕ್ಷಣೆ (ಟರ್ಮ್ ಇನ್ಶೂರೆನ್ಸ್)' : 'Family Protection (Term Insurance)'}
+              {isKn ? 'ಕುಟುಂಬ ರಕ್ಷಣೆ (ಟರ್ಮ್ ಇನ್ಶೂರೆನ್ಸ್)' : isTe ? 'కుటుంబ రక్షణ (టర్మ్ ఇన్సూరెన్స్)' : 'Family Protection (Term Insurance)'}
             </option>
             <option value="Child Higher Education Planning">
-              {isKn ? 'ಮಕ್ಕಳ ಉನ್ನತ ಶಿಕ್ಷಣ ಉಳಿತಾಯ' : 'Child Higher Education Planning'}
+              {isKn ? 'ಮಕ್ಕಳ ಉನ್ನತ ಶಿಕ್ಷಣ & ಉಳಿತಾಯ' : isTe ? 'పిల్లల ఉన్నత చదువుల ప్రణాళిక' : 'Child Future Planning'}
             </option>
             <option value="Retirement & Pension Planning">
-              {isKn ? 'ಸುರಕ್ಷಿತ ನಿವೃತ್ತಿ & ಪಿಂಚಣಿ' : 'Retirement & Pension Planning'}
+              {isKn ? 'ಸುರಕ್ಷಿತ ನಿವೃತ್ತಿ & ಪಿಂಚಣಿ' : isTe ? 'పదవీ విరమణ & పెన్షన్ ప్లానింగ్' : 'Retirement Planning'}
+            </option>
+            <option value="Savings & Investment Insurance">
+              {isKn ? 'ಉಳಿತಾಯ & ಹೂಡಿಕೆ ವಿಮೆ' : isTe ? 'పొదుపు & పెట్టుబడి బీమా' : 'Savings and Insurance'}
             </option>
             <option value="Existing Policy Review">
-              {isKn ? 'ಹಾಲಿ ಪಾಲಿಸಿ ಪರಿಶೀಲನೆ (ನಾಮಿನಿ/ಸ್ಟೇಟಸ್)' : 'Existing Policy Health Review'}
+              {isKn ? 'ಹಾಲಿ ಪಾಲಿಸಿ ಪರಿಶೀಲನೆ (ನಾಮಿನಿ/ಸ್ಟೇಟಸ್)' : isTe ? 'పాలసీ సమీక్ష & మార్గదర్శకత్వం' : 'Need Guidance / Policy Review'}
             </option>
             <option value="Claim Settlement Guidance">
-              {isKn ? 'ಕ್ಲೈಮ್ ಮಾರ್ಗದರ್ಶನ ಸಹಾಯ' : 'Claim Settlement Guidance'}
-            </option>
-            <option value="General Enquiry">
-              {isKn ? 'ಸಾಮಾನ್ಯ ಮಾಹಿತಿ' : 'General Enquiry'}
+              {isKn ? 'ಕ್ಲೈಮ್ ಮಾರ್ಗದರ್ಶನ ಸಹಾಯ' : isTe ? 'క్లెయిమ్ సహాయం' : 'Claim Settlement Assistance'}
             </option>
           </select>
         </div>
 
-        {/* Preferred Callback Time */}
+        {/* Preferred Contact Method */}
         <div>
-          <label htmlFor="lead-time" className="block text-xs font-medium text-slate-800 mb-1">
-            {isKn ? 'ಅನುಕೂಲಕರ ಸಮಯದ ಕಿಟಕಿ (Asia/Kolkata) *' : 'Convenient Time Window (Asia/Kolkata) *'}
+          <label htmlFor="lead-contact-method" className="block text-xs font-medium text-slate-800 mb-1">
+            {isKn ? 'ಸಂಪರ್ಕ ಮಾಧ್ಯಮ *' : isTe ? 'సంప్రదింపు విధానం *' : 'Preferred Contact Method *'}
           </label>
           <select
-            id="lead-time"
-            value={callbackTime}
-            onChange={(e) => setCallbackTime(e.target.value)}
+            id="lead-contact-method"
+            value={contactMethod}
+            onChange={(e) => setContactMethod(e.target.value as 'Phone Call' | 'WhatsApp' | 'In-person')}
             className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 bg-white"
           >
-            <option value="Morning (9:30 AM - 12:00 PM IST)">
-              {isKn ? 'ಬೆಳಗ್ಗೆ (9:30 AM – 12:00 PM IST)' : 'Morning (9:30 AM – 12:00 PM IST)'}
-            </option>
-            <option value="Afternoon (12:00 PM - 3:30 PM IST)">
-              {isKn ? 'ಮಧ್ಯಾಹ್ನ (12:00 PM – 3:30 PM IST)' : 'Afternoon (12:00 PM – 3:30 PM IST)'}
-            </option>
-            <option value="Evening (3:30 PM - 6:30 PM IST)">
-              {isKn ? 'ಸಂಜೆ (3:30 PM – 6:30 PM IST)' : 'Evening (3:30 PM – 6:30 PM IST)'}
-            </option>
+            <option value="Phone Call">{isKn ? 'ದೂರವಾಣಿ ಕರೆ (Phone Call)' : isTe ? 'ఫోన్ కాల్ (Phone Call)' : 'Phone Call'}</option>
+            <option value="WhatsApp">{isKn ? 'ವಾಟ್ಸಾಪ್ ಸಂದೇಶ (WhatsApp Chat)' : isTe ? 'వాట్సాప్ (WhatsApp)' : 'WhatsApp'}</option>
+            <option value="In-person">{isKn ? 'ಮುಖಾಮುಖಿ ಭೇಟಿ (In-person - Sindhanur Hub)' : isTe ? 'ముఖాముఖి (In-person)' : 'In-person Meeting'}</option>
           </select>
         </div>
+      </div>
+
+      <div className="mb-5">
+        <label htmlFor="lead-time" className="block text-xs font-medium text-slate-800 mb-1">
+          {isKn ? 'ಅನುಕೂಲಕರ ಸಮಯದ ಕಿಟಕಿ (Asia/Kolkata) *' : isTe ? 'అనుకూల సమయం (Asia/Kolkata) *' : 'Convenient Time Window (Asia/Kolkata) *'}
+        </label>
+        <select
+          id="lead-time"
+          value={callbackTime}
+          onChange={(e) => setCallbackTime(e.target.value)}
+          className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 bg-white"
+        >
+          <option value="Morning (9:30 AM - 12:00 PM IST)">
+            {isKn ? 'ಬೆಳಗ್ಗೆ (9:30 AM – 12:00 PM IST)' : isTe ? 'ఉదయం (9:30 AM – 12:00 PM IST)' : 'Morning (9:30 AM – 12:00 PM IST)'}
+          </option>
+          <option value="Afternoon (12:00 PM - 3:30 PM IST)">
+            {isKn ? 'ಮಧ್ಯಾಹ್ನ (12:00 PM – 3:30 PM IST)' : isTe ? 'మధ్యాహ్నం (12:00 PM – 3:30 PM IST)' : 'Afternoon (12:00 PM – 3:30 PM IST)'}
+          </option>
+          <option value="Evening (3:30 PM - 6:30 PM IST)">
+            {isKn ? 'ಸಂಜೆ (3:30 PM – 6:30 PM IST)' : isTe ? 'సాయంత్రం (3:30 PM – 6:30 PM IST)' : 'Evening (3:30 PM – 6:30 PM IST)'}
+          </option>
+        </select>
       </div>
 
       {/* Mandatory Regulatory & Privacy Notices: No Aadhaar / PAN notice */}
       <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200 text-xs text-slate-600 mb-5 flex items-start gap-2">
         <Shield className="w-4 h-4 text-teal-700 shrink-0 mt-0.5" />
         <p className="leading-relaxed">
-          <strong>{isKn ? 'ಗೌಪ್ಯತೆ ರಕ್ಷಣೆ:' : 'Privacy Assurance:'}</strong>{' '}
+          <strong>{isKn ? 'ಗೌಪ್ಯತೆ ರಕ್ಷಣೆ:' : isTe ? 'గోప్యతా హామీ:' : 'Privacy Assurance:'}</strong>{' '}
           {isKn
             ? 'ನಾವು ಆಧಾರ್, ಪ್ಯಾನ್, ಬ್ಯಾಂಕ್ ಖಾತೆ ವಿವರ, ಒಟಿಪಿ ಅಥವಾ ವೈದ್ಯಕೀಯ ದಾಖಲೆಗಳನ್ನು ಈ ಜಾಲತಾಣದಲ್ಲಿ ಎಂದಿಗೂ ಸಂಗ್ರಹಿಸುವುದಿಲ್ಲ. ಕೇವಲ ಪ್ರಾಥಮಿಕ ಸಮಾಲೋಚನೆಗಾಗಿ ಮಾತ್ರ ಸಂಪರ್ಕ ಮಾಹಿತಿಯನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.'
+            : isTe
+            ? 'మేము ఆధార్, పాన్, బ్యాంక్ ఖాతా వివరాలు లేదా OTPలను ఈ వెబ్‌సైట్‌లో ఎప్పుడూ సేకరించము. సమాచారం కేవలం సలహా కాల్ షెడ్యూల్ చేయడానికి మాత్రమే ఉపయోగించబడుతుంది.'
             : 'We never collect Aadhaar, PAN, bank account details, OTP, or medical files on this website. Information is used strictly for scheduling your advisory call.'}
         </p>
       </div>
@@ -399,15 +449,17 @@ export const LeadCaptureForm: React.FC<Props> = ({
             required
             checked={consultationConsent}
             onChange={(e) => setConsultationConsent(e.target.checked)}
-            className="mt-1 w-4 h-4 text-teal-800 rounded border-slate-300 focus:ring-teal-700 cursor-pointer"
+            className="mt-1 w-4 h-4 text-teal-800 rounded border-slate-300 focus:ring-teal-700 cursor-pointer shrink-0"
           />
           <span className="text-xs text-slate-700 leading-relaxed">
             <strong className="text-slate-900">
-              {isKn ? 'ಸಮಾಲೋಚನಾ ಸಮ್ಮತಿ (ಕಡ್ಡಾಯ) *' : 'Consultation Callback Consent (Mandatory) *'}
+              {isKn ? 'ಸಮಾಲೋಚನಾ ಸಮ್ಮತಿ (ಕಡ್ಡಾಯ) *' : isTe ? 'సమాలోచన సమ్మతి (తప్పనిసరి) *' : 'Consultation Callback Consent (Mandatory) *'}
             </strong>{' '}
             {isKn
-              ? 'ನನ್ನ ಈ ವಿಚಾರಣೆಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ಸೋಫಿಯಾ ರಾಣಿ (ಎಸ್.ಬಿ.ಐ ಲೈಫ್ ವಿಮಾ ಸಲಹೆಗಾರ್ತಿ) ಅವರು ನನ್ನನ್ನು ಫೋನ್ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಲು ನಾನು ಒಪ್ಪಿಗೆ ನೀಡುತ್ತೇನೆ.'
-              : 'I voluntarily agree that Sofia Rani may contact me via phone or WhatsApp regarding this specific life insurance enquiry.'}
+              ? 'ನನ್ನ ಈ ವಿಚಾರಣೆಗೆ ಸಂಬಂಧಿಸಿದಂತೆ ಸೋಫಿಯಾ ರಾಣಿ (ಎಸ್.ಬಿ.ಐ ಲೈಫ್ ವಿಮಾ ಸಲಹೆಗಾರ್ತಿ, ಸಿಂಧನೂರು) ಅವರು ನನ್ನನ್ನು ಫೋನ್ ಅಥವಾ ವಾಟ್ಸಾಪ್ ಮೂಲಕ ಸಂಪರ್ಕಿಸಲು ನಾನು ಒಪ್ಪಿಗೆ ನೀಡುತ್ತೇನೆ.'
+              : isTe
+              ? 'నా ఈ విచారణకు సంబంధించి సోఫియా రాణి గారు (SBI లైఫ్ ఇన్సూరెన్స్ సలహాదారు, సింధనూరు) నన్ను ఫోన్ లేదా వాట్సాప్ ద్వారా సంప్రదించడానికి నేను అంగీకరిస్తున్నాను.'
+              : 'I voluntarily agree that Sofia Rani (SBI Life Insurance Advisor, Sindhanur) may contact me via phone or WhatsApp regarding this life insurance enquiry.'}
           </span>
         </label>
         {errors.consent && <p className="text-[11px] text-red-600 pl-7">{errors.consent}</p>}
@@ -418,14 +470,16 @@ export const LeadCaptureForm: React.FC<Props> = ({
             type="checkbox"
             checked={marketingConsent}
             onChange={(e) => setMarketingConsent(e.target.checked)}
-            className="mt-1 w-4 h-4 text-teal-800 rounded border-slate-300 focus:ring-teal-700 cursor-pointer"
+            className="mt-1 w-4 h-4 text-teal-800 rounded border-slate-300 focus:ring-teal-700 cursor-pointer shrink-0"
           />
           <span className="text-xs text-slate-500 leading-relaxed">
             <strong className="text-slate-700">
-              {isKn ? 'ಶೈಕ್ಷಣಿಕ ಅಪ್‌ಡೇಟ್ ಸಮ್ಮತಿ (ಐಚ್ಛಿಕ)' : 'Educational Updates Consent (Optional)'}
+              {isKn ? 'ಶೈಕ್ಷಣಿಕ ಅಪ್‌ಡೇಟ್ ಸಮ್ಮತಿ (ಐಚ್ಛಿಕ)' : isTe ? 'విద్యా సంబంధిత సమాచారం (ఐచ్ఛికం)' : 'Educational Updates Consent (Optional)'}
             </strong>{' '}
             {isKn
               ? 'ಕುಟುಂಬದ ಆರ್ಥಿಕ ಭದ್ರತೆಯ ಕುರಿತಾದ ಉಪಯುಕ್ತ ಶೈಕ್ಷಣಿಕ ಲೇಖನಗಳನ್ನು ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಸಾಂದರ್ಭಿಕವಾಗಿ ಸ್ವೀಕರಿಸಲು ನಾನು ಇಷ್ಟಪಡುತ್ತೇನೆ.'
+              : isTe
+              ? 'కుటుంబ ఆర్థిక భద్రత గురించిన ఉపయోగకరమైన సమాచారాన్ని వాట్సాప్‌లో అప్పుడప్పుడు స్వీకరించాలనుకుంటున్నాను.'
               : 'I would like to receive occasional educational articles on family financial protection via WhatsApp.'}
           </span>
         </label>
@@ -435,19 +489,23 @@ export const LeadCaptureForm: React.FC<Props> = ({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3 px-6 bg-teal-800 hover:bg-teal-900 disabled:bg-slate-300 text-white font-semibold text-sm rounded-xl transition-colors cursor-pointer shadow-sm flex items-center justify-center gap-2"
+        className="w-full py-3 px-6 bg-teal-800 hover:bg-teal-900 active:bg-teal-950 disabled:bg-slate-300 text-white font-semibold text-sm rounded-xl transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2"
       >
         {isSubmitting ? (
-          <span>{isKn ? 'ದಾಖಲಿಸಲಾಗುತ್ತಿದೆ...' : 'Logging Request...'}</span>
+          <span>{isKn ? 'ದಾಖಲಿಸಲಾಗುತ್ತಿದೆ...' : isTe ? 'నమోదు చేయబడుతోంది...' : 'Logging Request...'}</span>
         ) : (
           <>
             <span>
               {isCallbackRequestOnly
                 ? isKn
                   ? 'ಮರಳಿ ಕರೆ ಮಾಡಲು ವಿನಂತಿ ಕಳುಹಿಸಿ'
+                  : isTe
+                  ? 'కాల్‌బ్యాక్ అభ్యర్థన పంపండి'
                   : 'Submit Callback Request'
                 : isKn
                 ? 'ಸಮಾಲೋಚನೆ ವಿನಂತಿ ಸಲ್ಲಿಸಿ'
+                : isTe
+                ? 'సమాలోచన అభ్యర్థన సమర్పించండి'
                 : 'Confirm Advisory Request'}
             </span>
             <ArrowRight className="w-4 h-4" />
@@ -458,6 +516,8 @@ export const LeadCaptureForm: React.FC<Props> = ({
       <div className="text-center mt-3 text-[11px] text-slate-500">
         {isKn
           ? 'ಕೆಲಸದ ಸಮಯ: ಸೋಮವಾರ – ಶನಿವಾರ | 9:30 AM – 6:30 PM (Asia/Kolkata)'
+          : isTe
+          ? 'పని వేళలు: సోమవారం – శనివారం | 9:30 AM – 6:30 PM IST'
           : 'Working Hours: Monday – Saturday | 9:30 AM – 6:30 PM IST'}
       </div>
     </form>

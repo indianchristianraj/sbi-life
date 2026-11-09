@@ -5,7 +5,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Top Bar & Brand
     advisorName: 'ಸೋಫಿಯಾ ರಾಣಿ',
     advisorTitle: 'ಎಸ್.ಬಿ.ಐ ಲೈಫ್ ಇನ್ಶೂರೆನ್ಸ್ ಸಲಹೆಗಾರ್ತಿ',
-    locationGangavathi: 'ಗಂಗಾವತಿ, ಕೊಪ್ಪಳ ಜಿಲ್ಲೆ',
+    locationGangavathi: 'ಸಿಂಧನೂರು, ರಾಯಚೂರು ಜಿಲ್ಲೆ',
     bookCallCta: 'ಉಚಿತ ಸಮಾಲೋಚನೆ ಪಡೆಯಿರಿ',
     whatsappCta: 'ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಮಾತನಾಡಿ',
     callNowCta: 'ನೇರವಾಗಿ ಕರೆ ಮಾಡಿ',
@@ -26,11 +26,11 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     navAdmin: 'ಸಲಹೆಗಾರರ ಪೋರ್ಟಲ್',
 
     // Hero Section
-    heroBadge: 'ಗಂಗಾವತಿಯ ವಿಶ್ವಾಸಾರ್ಹ ಜೀವ ವಿಮಾ ಮಾರ್ಗದರ್ಶನ',
-    heroHeadline: 'ನಿಮ್ಮ ಕುಟುಂಬದ ಆರ್ಥಿಕ ಭದ್ರತೆಗೆ ಪಾರದರ್ಶಕ ರಕ್ಷಣಾ ಯೋಜನೆ',
-    heroSubhead: 'ಯಾವುದೇ ಒತ್ತಡವಿಲ್ಲದೆ, ನಿಮ್ಮ ಕುಟುಂಬದ ನೈಜ ಅಗತ್ಯತೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಂಡು ಸರಿಯಾದ ಜೀವ ವಿಮಾ ರಕ್ಷಣೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಸೋಫಿಯಾ ರಾಣಿ ಅವರೊಂದಿಗೆ ಮುಕ್ತವಾಗಿ ಸಮಾಲೋಚಿಸಿ.',
-    heroPrimaryAction: 'ಉಚಿತ ಸಮಾಲೋಚನೆ ನಿಗದಿಪಡಿಸಿ',
-    heroSecondaryAction: 'ವಾಟ್ಸಾಪ್ ಸಂದೇಶ ಕಳುಹಿಸಿ',
+    heroBadge: 'ಸಿಂಧನೂರಿನ ವಿಶ್ವಾಸಾರ್ಹ ಜೀವ ವಿಮಾ ಮಾರ್ಗದರ್ಶನ',
+    heroHeadline: 'ನಿಮ್ಮ ಕುಟುಂಬದ ಭವಿಷ್ಯಕ್ಕೆ ಸೂಕ್ತವಾದ ಜೀವ ವಿಮಾ ಮಾರ್ಗದರ್ಶನ',
+    heroSubhead: 'ಸಿಂಧನೂರು ಮತ್ತು ಸುತ್ತಮುತ್ತಲಿನ ಕುಟುಂಬಗಳಿಗೆ ವೈಯಕ್ತಿಕಗೊಳಿಸಿದ ಜೀವ ವಿಮಾ ಮಾರ್ಗದರ್ಶನ.',
+    heroPrimaryAction: 'ಸಮಾಲೋಚನೆ ನಿಗದಿಪಡಿಸಿ',
+    heroSecondaryAction: 'ವಿಮಾ ಆಯ್ಕೆಗಳನ್ನು ತಿಳಿಯಿರಿ',
     heroNotice: 'ಗಮನಿಸಿ: ಇದು ಸ್ವತಂತ್ರ ಅಧಿಕೃತ ವಿಮಾ ಸಲಹಾ ವೇದಿಕೆಯಾಗಿದೆ. ಯಾವುದೇ ಮುಂಗಡ ಶುಲ್ಕ ಅಥವಾ ವೈಯಕ್ತಿಕ ಪಾವತಿಗಳಿಲ್ಲ.',
 
     // Life Goals
@@ -70,8 +70,8 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     faq1A: 'ಖಂಡಿತವಾಗಿಯೂ ಇಲ್ಲ. ಕುಟುಂಬದ ವಿಮಾ ಅಗತ್ಯತೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವ ಸಮಾಲೋಚನೆ ಸಂಪೂರ್ಣ ಉಚಿತವಾಗಿರುತ್ತದೆ.',
     faq2Q: 'ನನ್ನ ಪ್ರೀಮಿಯಂ ಮೊತ್ತವನ್ನು ಸೋಫಿಯಾ ಅವರ ವೈಯಕ್ತಿಕ ಖಾತೆಗೆ ನೀಡಬಹುದೇ?',
     faq2A: 'ಖಂಡಿತವಾಗಿ ನೀಡಬಾರದು. ಎಲ್ಲಾ ವಿಮಾ ಪ್ರೀಮಿಯಂಗಳನ್ನು ನೇರವಾಗಿ ಅಧಿಕೃತ ಎಸ್.ಬಿ.ಐ ಲೈಫ್ ಪೋರ್ಟಲ್ ಅಥವಾ ಅಧಿಕೃತ ಶಾಖೆಗಳ ಮೂಲಕವೇ ಪಾವತಿಸಬೇಕು ಮತ್ತು ಕಂಪನಿಯ ಕಂಪ್ಯೂಟರ್ ರಶೀದಿ ಪಡೆಯಬೇಕು.',
-    faq3Q: 'ಗಂಗಾವತಿಯ ಹೊರಗಿನ ಗ್ರಾಹಕರಿಗೂ ಸೇವೆ ನೀಡುತ್ತೀರಾ?',
-    faq3A: 'ಹೌದು, ಕಾರಟಗಿ, ಕನಕಗಿರಿ, ಕಂಪ್ಲಿ, ಆನೆಗೊಂದಿ, ಸಿಂಧನೂರು ಮತ್ತು ಕೊಪ್ಪಳ ಜಿಲ್ಲೆಯ ಗ್ರಾಮೀಣ ಪ್ರದೇಶಗಳ ಗ್ರಾಹಕರಿಗೆ ಫೋನ್ ಅಥವಾ ಮುಖಾಮುಖಿ ಭೇಟಿ ಮೂಲಕ ಸೇವೆ ನೀಡಲಾಗುತ್ತದೆ.',
+    faq3Q: 'ಸಿಂಧನೂರಿನ ಹೊರಗಿನ ಗ್ರಾಹಕರಿಗೂ ಸೇವೆ ನೀಡುತ್ತೀರಾ?',
+    faq3A: 'ಹೌದು. ತುರ್ವಿಹಾಳ, ಮಸ್ಕಿ, ಮಾನ್ವಿ, ಸಿರುಗುಪ್ಪ, ಗಂಗಾವತಿ, ರಾಯಚೂರು, ಲಿಂಗಸುಗೂರು, ಕೊಪ್ಪಳ ಹಾಗೂ ಸುತ್ತಮುತ್ತಲಿನ ಗ್ರಾಮೀಣ ಕೃಷಿ ಪ್ರದೇಶಗಳ ಗ್ರಾಹಕರಿಗೆ ಫೋನ್, ವಾಟ್ಸಾಪ್ ಅಥವಾ ಪೂರ್ವನಿಗದಿತ ಮುಖಾಮುಖಿ ಭೇಟಿ ಮೂಲಕ ಸೇವೆ ನೀಡಲಾಗುತ್ತದೆ.',
     faq4Q: 'ಟರ್ಮ್ ಇನ್ಶೂರೆನ್ಸ್ ಮತ್ತು ಎಂಡೋಮೆಂಟ್ ಪಾಲಿಸಿಯ ನಡುವಿನ ವ್ಯತ್ಯಾಸವೇನು?',
     faq4A: 'ಟರ್ಮ್ ಪಾಲಿಸಿಯು ಕಡಿಮೆ ವೆಚ್ಚದಲ್ಲಿ ಅತಿ ದೊಡ್ಡ ಜೀವ ರಕ್ಷಣೆಯನ್ನು ಒದಗಿಸುತ್ತದೆ. ಎಂಡೋಮೆಂಟ್ ಪಾಲಿಸಿಯು ರಕ್ಷಣೆಯ ಜೊತೆಗೆ ನಿಗದಿತ ಉಳಿತಾಯವನ್ನು ನೀಡುತ್ತದೆ. ನಿಮ್ಮ ಕುಟುಂಬದ ಬಜೆಟ್ ಆಧರಿಸಿ ಆಯ್ಕೆ ಮಾಡಬಹುದು.',
 
@@ -85,13 +85,13 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     testimonialNoticeDesc: 'ನೈತಿಕ ನೀತಿ ಸಂಹಿತೆಯ ಪ್ರಕಾರ, ಅಧಿಕೃತ ಅನುಮೋದನೆ ಪಡೆದ ನೈಜ ಗ್ರಾಹಕರ ಅನುಭವಗಳನ್ನು ಮಾತ್ರ ಇಲ್ಲಿ ಪ್ರಕಟಿಸಲಾಗುವುದು. ಪ್ರಸ್ತುತ ಪರಿಶೀಲನೆ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ.',
 
     // Language switcher notes
-    teluguNotice: 'ತೆಲುಗು ಭಾಷಾ ರಚನೆ ಸಿದ್ಧವಿದೆ. ಸಲಹೆಗಾರ್ತಿಯವರ ನೇರ ದೃಢೀಕರಣದ ನಂತರ ತೆಲುಗು ಸಮಾಲೋಚನೆ ಸಕ್ರಿಯಗೊಳ್ಳಲಿದೆ.',
+    teluguNotice: 'ತೆಲುಗು ಭಾಷಾ ಬೆಂಬಲ ಸಕ್ರಿಯವಾಗಿದೆ. ಸಿಂಧನೂರು, ತುರ್ವಿಹಾಳ, ಮಸ್ಕಿ ಮತ್ತು ತೆಲುಗು ಮಾತನಾಡುವ ಗ್ರಾಹಕರಿಗೆ ಮುಕ್ತ ಸಮಾಲೋಚನೆ ಲಭ್ಯ.',
   },
   en: {
     // Top Bar & Brand
     advisorName: 'Sofia Rani',
     advisorTitle: 'SBI Life Insurance Advisor',
-    locationGangavathi: 'Gangavathi, Koppal District',
+    locationGangavathi: 'Sindhanur, Raichur District',
     bookCallCta: 'Get Free Consultation',
     whatsappCta: 'WhatsApp Sofia',
     callNowCta: 'Call Direct',
@@ -112,11 +112,11 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     navAdmin: 'Advisor Portal',
 
     // Hero Section
-    heroBadge: 'Transparent Life Advisory in Gangavathi',
-    heroHeadline: 'Transparent Protection Planning for Your Family’s Financial Peace',
-    heroSubhead: 'Make informed decisions without sales pressure. Sofia Rani helps families in Gangavathi and surrounding taluks understand real protection needs and choose the right life cover.',
-    heroPrimaryAction: 'Book a Conversation',
-    heroSecondaryAction: 'WhatsApp Sofia',
+    heroBadge: 'Trusted Life Advisory in Sindhanur',
+    heroHeadline: "Protect Your Family's Future with the Right Guidance",
+    heroSubhead: 'Personalized life insurance guidance for families in Sindhanur and nearby areas.',
+    heroPrimaryAction: 'Book a Consultation',
+    heroSecondaryAction: 'Explore Insurance Options',
     heroNotice: 'Notice: Independent authorized insurance advisory site. No advance fees or personal account transfers.',
 
     // Life Goals
@@ -156,8 +156,8 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     faq1A: 'No. Initial advisory consultations to assess your family protection requirements are completely free and non-obligatory.',
     faq2Q: 'Can I pay my insurance premiums directly to Sofia Rani?',
     faq2A: 'Never pay cash or transfer funds into any individual account. All premiums must be remitted strictly through official SBI Life online payment portals, authorized bank branches, or certified cashier counters with an immediate computer receipt.',
-    faq3Q: 'Do you serve areas outside Gangavathi city?',
-    faq3A: 'Yes. Consultations are available across Karatagi, Kanakagiri, Kampli, Anegundi, Sindhanoor border, and surrounding villages in Koppal and Vijayanagara districts via phone or in-person visits.',
+    faq3Q: 'Do you serve areas outside Sindhanur town?',
+    faq3A: 'Yes. Consultations are available across Turvihal, Maski, Manvi, Siruguppa, Gangavathi, Raichur, Lingasugur, Koppal, and surrounding rural farming villages via phone, WhatsApp, or scheduled personal visits.',
     faq4Q: 'What is the main difference between Term Insurance and Endowment plans?',
     faq4A: 'Term insurance provides high pure death cover at an affordable cost without savings accumulation. Endowment or savings plans combine life cover with structured maturity benefits. Your choice depends on your specific financial goals.',
 
@@ -171,13 +171,13 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     testimonialNoticeDesc: 'In strict compliance with professional guidelines, only verified and approved client feedback will be displayed here once internal review is complete.',
 
     // Language switcher notes
-    teluguNotice: 'Telugu preview active. Sofia Rani will confirm active Telugu conversational advisory prior to public marketing.',
+    teluguNotice: 'Telugu advisory supported. Consultations available in Kannada, English, and Telugu.',
   },
   te: {
-    // Top Bar & Brand (Telugu Draft Preview)
+    // Top Bar & Brand (Telugu)
     advisorName: 'సోఫియా రాణి',
-    advisorTitle: 'ఎస్.బి.ఐ లైఫ్ ఇన్సూరెన్స్ సలహాదారు',
-    locationGangavathi: 'గంగావతి, కొప్పల్ జిల్లా',
+    advisorTitle: 'ఎస్.బి.ಐ లైఫ్ ఇన్సూరెన్స్ సలహాదారు',
+    locationGangavathi: 'సింధనూరు, రాయచూరు జిల్లా',
     bookCallCta: 'ఉచిత సంప్రదింపు పొందండి',
     whatsappCta: 'వాట్సాప్‌లో మాట్లాడండి',
     callNowCta: 'కాల్ చేయండి',
@@ -198,11 +198,11 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     navAdmin: 'అడ్మిన్ పోర్టల్',
 
     // Hero Section
-    heroBadge: 'గంగావతిలో నిజాయితీగల జీవిత బీమా సలహా',
-    heroHeadline: 'మీ కుటుంబ భవిష్యత్తుకు నమ్మకమైన ఆర్థిక రక్షణ',
-    heroSubhead: 'ఎలాంటి ఒత్తిడి లేకుండా మీ కుటుంబ అవసరాలకు తగిన జీవిత బీమా రక్షణను ఎంచుకోవడానికి సోఫియా రాణి గారిని సంప్రదించండి.',
-    heroPrimaryAction: 'సమాలోచన షెడ్యూల్ చేయండి',
-    heroSecondaryAction: 'వాట్సాప్ సందేశం',
+    heroBadge: 'సింధనూరులో నమ్మకమైన జీవిత బీమా మార్గదర్శకత్వం',
+    heroHeadline: 'మీ కుటుంబ భవిష్యత్తుకు సరైన జీవిత బీమా మార్గదర్శకత్వం',
+    heroSubhead: 'సింధనూరు మరియు పరిసర ప్రాంతాల కుటుంబాలకు వ్యక్తిగతీకరించిన జీవిత బీమా మార్గదర్శకత్వం.',
+    heroPrimaryAction: 'సమాలోచన బుక్ చేయండి',
+    heroSecondaryAction: 'బీమా ఎంపికలను చూడండి',
     heroNotice: 'గమనిక: ఇది స్వతంత్ర అధికృత బీమా సలహా వేదిక.',
 
     // Life Goals
@@ -242,8 +242,8 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     faq1A: 'లేదు. ప్రాథమిక సలహా మరియు అవసరాల విశ్లేషణ పూర్తిగా ఉచితం.',
     faq2Q: 'ప్రీమియం డబ్బులను వ్యక్తిగతంగా ఇవ్వవచ్చా?',
     faq2A: 'వ్యక్తిగతంగా ఇవ్వకూడదు. కేవలం అధికారిక SBI లైఫ్ పోర్టల్ లేదా శాఖల్లో మాత్రమే చెల్లించాలి.',
-    faq3Q: 'గంగావతి వెలుపల కూడా సేవలు అందిస్తారా?',
-    faq3A: 'అవును. సమీప గ్రామాలు మరియు తాలూకాలలో ఫోన్ లేదా వ్యక్తిగత సందర్శన ద్వారా సేవలు అందుబాటులో ఉన్నాయి.',
+    faq3Q: 'సింధనూరు వెలుపల కూడా సేవలు అందిస్తారా?',
+    faq3A: 'అవును. తుర్విహాళ్, మస్కి, మాన్వి, సిరుగుప్ప, గంగావతి, రాయచూరు, లింగసుగూరు, కొప్పల్ మరియు సమీప గ్రామీణ ప్రాంతాలలో ఫోన్, వాట్సాప్ లేదా ముఖాముఖి ద్వారా సేవలందిస్తాము.',
     faq4Q: 'టర్మ్ ఇన్సూరెన్స్ ఎందుకు ముఖ్యం?',
     faq4A: 'తక్కువ ఖర్చుతో అత్యధిక రక్షణను ఇచ్చే అత్యుత్తమ విధానం టర్మ్ ఇన్సూరెన్స్.',
 
@@ -256,6 +256,6 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     testimonialNoticeTitle: 'కస్టమర్ అభిప్రాయాలు',
     testimonialNoticeDesc: 'కంపెనీ నిబంధనల ప్రకారం ధృవీకరించిన కస్టమర్ అనుభవాలు సమీక్ష తర్వాత ఇక్కడ చూపబడతాయి.',
 
-    teluguNotice: 'తెలుగు అనువాదం ప్రివ్యూలో ఉంది. సోఫియా రాణి గారు ధృవీకరించిన తర్వాత పూర్తిస్థాయిలో అందుబాటులోకి వస్తుంది.',
+    teluguNotice: 'తెలుగు సలహా సదుపాయం అందుబాటులో ఉంది. కన్నడ, ఇంగ్లీష్, తెలుగులో మాట్లాడవచ్చు.',
   },
 };

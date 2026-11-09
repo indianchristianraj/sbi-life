@@ -69,8 +69,8 @@ export const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
             </span>
             <h3 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
               {isKn
-                ? 'ಗಂಗಾವತಿಯ ಕುಟುಂಬಗಳ ನೈಜ ಅಭಿಪ್ರಾಯಗಳು'
-                : 'Real Experiences from Families in Gangavathi'}
+                ? 'ಸಿಂಧನೂರು ಮತ್ತು ಸುತ್ತಮುತ್ತಲಿನ ಕುಟುಂಬಗಳ ನೈಜ ಅಭಿಪ್ರಾಯಗಳು'
+                : 'Real Experiences from Families in Sindhanur & Regional Hubs'}
             </h3>
           </div>
 
